@@ -6,7 +6,7 @@ import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { X, ChevronLeft, ChevronRight } from "lucide-react"
+import { X, ChevronLeft, ChevronRight, ExternalLink, Github, Linkedin, Twitter, Instagram } from "lucide-react"
 
 const projects = [
   {
@@ -29,6 +29,13 @@ const projects = [
       "/placeholder.svg?height=600&width=800",
       "/placeholder.svg?height=600&width=800",
     ],
+    liveUrl: "https://example.com/styleshop",
+    githubUrl: "https://github.com/alberow/styleshop",
+    socialLinks: {
+      twitter: "https://twitter.com/styleshop",
+      instagram: "https://instagram.com/styleshop",
+      linkedin: "https://linkedin.com/company/styleshop",
+    },
   },
   {
     id: "corporate-website-redesign",
@@ -50,6 +57,12 @@ const projects = [
       "/placeholder.svg?height=600&width=800",
       "/placeholder.svg?height=600&width=800",
     ],
+    liveUrl: "https://techcorp.com",
+    githubUrl: null,
+    socialLinks: {
+      twitter: "https://twitter.com/techcorp",
+      linkedin: "https://linkedin.com/company/techcorp",
+    },
   },
   {
     id: "social-media-dashboard",
@@ -71,6 +84,13 @@ const projects = [
       "/placeholder.svg?height=600&width=800",
       "/placeholder.svg?height=600&width=800",
     ],
+    liveUrl: "https://dashboard.marketingpro.com",
+    githubUrl: "https://github.com/alberow/marketing-dashboard",
+    socialLinks: {
+      twitter: "https://twitter.com/marketingpro",
+      instagram: "https://instagram.com/marketingpro",
+      linkedin: "https://linkedin.com/company/marketingpro",
+    },
   },
   {
     id: "restaurant-booking-system",
@@ -92,6 +112,12 @@ const projects = [
       "/placeholder.svg?height=600&width=800",
       "/placeholder.svg?height=600&width=800",
     ],
+    liveUrl: "https://booking.finedininggroup.com",
+    githubUrl: null,
+    socialLinks: {
+      instagram: "https://instagram.com/finedininggroup",
+      linkedin: "https://linkedin.com/company/finedininggroup",
+    },
   },
   {
     id: "portfolio-website",
@@ -113,6 +139,12 @@ const projects = [
       "/placeholder.svg?height=600&width=800",
       "/placeholder.svg?height=600&width=800",
     ],
+    liveUrl: "https://alexjohnsonphotography.com",
+    githubUrl: "https://github.com/alberow/alex-portfolio",
+    socialLinks: {
+      instagram: "https://instagram.com/alexjohnsonphoto",
+      twitter: "https://twitter.com/alexjphoto",
+    },
   },
   {
     id: "fitness-tracking-app",
@@ -134,6 +166,13 @@ const projects = [
       "/placeholder.svg?height=600&width=800",
       "/placeholder.svg?height=600&width=800",
     ],
+    liveUrl: "https://fitlifeapp.com",
+    githubUrl: "https://github.com/alberow/fitlife-app",
+    socialLinks: {
+      twitter: "https://twitter.com/fitlifeapp",
+      instagram: "https://instagram.com/fitlifeapp",
+      linkedin: "https://linkedin.com/company/fitlife",
+    },
   },
 ]
 
@@ -298,10 +337,11 @@ export function ProjectsGrid() {
                     </>
                   )}
 
+                  {/* Only one close button */}
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="absolute top-2 right-2 bg-background/80 backdrop-blur-sm hover:bg-background/90 rounded-full"
+                    className="absolute top-2 right-2 bg-background/80 backdrop-blur-sm hover:bg-background/90 rounded-full z-10"
                     onClick={() => setIsModalOpen(false)}
                   >
                     <X className="h-5 w-5" />
@@ -317,38 +357,149 @@ export function ProjectsGrid() {
 
                 <div className="p-6">
                   <DialogHeader>
-                    <DialogTitle className="text-2xl font-bold">{selectedProject.title}</DialogTitle>
+                    <DialogTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
+                      {selectedProject.title}
+                    </DialogTitle>
                     <DialogDescription className="text-foreground/70">
                       {selectedProject.category} • {selectedProject.client} • {selectedProject.year}
                     </DialogDescription>
                   </DialogHeader>
 
                   <div className="mt-6 space-y-6">
-                    <div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                    >
                       <h3 className="text-lg font-semibold mb-2">Challenge</h3>
                       <p className="text-foreground/70">{selectedProject.challenge}</p>
-                    </div>
+                    </motion.div>
 
-                    <div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
                       <h3 className="text-lg font-semibold mb-2">Solution</h3>
                       <p className="text-foreground/70">{selectedProject.solution}</p>
-                    </div>
+                    </motion.div>
 
-                    <div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                    >
                       <h3 className="text-lg font-semibold mb-2">Results</h3>
                       <p className="text-foreground/70">{selectedProject.results}</p>
-                    </div>
+                    </motion.div>
 
-                    <div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                    >
                       <h3 className="text-lg font-semibold mb-2">Technologies Used</h3>
                       <div className="flex flex-wrap gap-2">
                         {selectedProject.technologies.map((tech, i) => (
-                          <span key={i} className="text-sm bg-muted px-3 py-1 rounded">
+                          <motion.span
+                            key={i}
+                            className="text-sm bg-muted px-3 py-1 rounded"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.4 + i * 0.05 }}
+                            whileHover={{ scale: 1.05, backgroundColor: "rgba(147, 51, 234, 0.1)" }}
+                          >
                             {tech}
-                          </span>
+                          </motion.span>
                         ))}
                       </div>
-                    </div>
+                    </motion.div>
+
+                    {/* Project Links */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.5 }}
+                      className="flex flex-col sm:flex-row gap-4 pt-2"
+                    >
+                      {selectedProject.liveUrl && (
+                        <Button
+                          className="bg-gradient-to-r from-purple-600 to-pink-600"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            window.open(selectedProject.liveUrl, "_blank")
+                          }}
+                        >
+                          <ExternalLink className="mr-2 h-4 w-4" /> View Live Project
+                        </Button>
+                      )}
+
+                      {selectedProject.githubUrl && (
+                        <Button
+                          variant="outline"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            window.open(selectedProject.githubUrl, "_blank")
+                          }}
+                        >
+                          <Github className="mr-2 h-4 w-4" /> View Code
+                        </Button>
+                      )}
+                    </motion.div>
+
+                    {/* Social Media Links */}
+                    {selectedProject.socialLinks && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.6 }}
+                      >
+                        <h3 className="text-lg font-semibold mb-2">Client Social Media</h3>
+                        <div className="flex gap-2">
+                          {selectedProject.socialLinks.twitter && (
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="rounded-full hover:bg-blue-100 hover:text-blue-500 dark:hover:bg-blue-900/20"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                window.open(selectedProject.socialLinks.twitter, "_blank")
+                              }}
+                            >
+                              <Twitter className="h-5 w-5" />
+                            </Button>
+                          )}
+
+                          {selectedProject.socialLinks.instagram && (
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="rounded-full hover:bg-pink-100 hover:text-pink-500 dark:hover:bg-pink-900/20"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                window.open(selectedProject.socialLinks.instagram, "_blank")
+                              }}
+                            >
+                              <Instagram className="h-5 w-5" />
+                            </Button>
+                          )}
+
+                          {selectedProject.socialLinks.linkedin && (
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="rounded-full hover:bg-blue-100 hover:text-blue-700 dark:hover:bg-blue-900/20"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                window.open(selectedProject.socialLinks.linkedin, "_blank")
+                              }}
+                            >
+                              <Linkedin className="h-5 w-5" />
+                            </Button>
+                          )}
+                        </div>
+                      </motion.div>
+                    )}
                   </div>
                 </div>
               </motion.div>

@@ -19,6 +19,8 @@ import {
   Building2,
   Menu,
   X,
+  BellRing,
+  Share2,
 } from "lucide-react"
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -71,6 +73,18 @@ export function AdminSidebar({ className, isCollapsed = false }: SidebarProps) {
       active: pathname.includes("/admin/messages"),
     },
     {
+      label: "Marketing",
+      icon: Share2,
+      href: "/admin/marketing",
+      active: pathname.includes("/admin/marketing"),
+    },
+    {
+      label: "Notifications",
+      icon: BellRing,
+      href: "/admin/notifications",
+      active: pathname.includes("/admin/notifications"),
+    },
+    {
       label: "Files",
       icon: FolderOpen,
       href: "/admin/files",
@@ -117,9 +131,14 @@ export function AdminSidebar({ className, isCollapsed = false }: SidebarProps) {
       >
         <div className="flex h-14 items-center px-4 border-b">
           <Link href="/admin" className="flex items-center gap-2">
-            <div className="font-bold text-xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              {isCollapsed ? "A" : "Alberow"}
+            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center text-white font-bold">
+              A
             </div>
+            {!isCollapsed && (
+              <div className="font-bold text-xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Alberow
+              </div>
+            )}
           </Link>
         </div>
         <ScrollArea className="h-[calc(100vh-3.5rem)]">

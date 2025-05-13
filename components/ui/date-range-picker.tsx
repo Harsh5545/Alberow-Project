@@ -1,8 +1,6 @@
 "use client"
-
-import type * as React from "react"
-import { format } from "date-fns"
 import { CalendarIcon } from "lucide-react"
+import { format } from "date-fns"
 import type { DateRange } from "react-day-picker"
 
 import { cn } from "@/lib/utils"
@@ -10,9 +8,10 @@ import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
-interface DateRangePickerProps extends React.HTMLAttributes<HTMLDivElement> {
+interface DateRangePickerProps {
   date: DateRange | undefined
   setDate: (date: DateRange) => void
+  className?: string
 }
 
 export function DateRangePicker({ date, setDate, className }: DateRangePickerProps) {
@@ -35,7 +34,7 @@ export function DateRangePicker({ date, setDate, className }: DateRangePickerPro
                 format(date.from, "LLL dd, y")
               )
             ) : (
-              <span>Pick a date</span>
+              <span>Pick a date range</span>
             )}
           </Button>
         </PopoverTrigger>

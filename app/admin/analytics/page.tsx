@@ -16,10 +16,14 @@ import { GeographyMap } from "@/components/admin/analytics/geography-map"
 import { SocialPerformance } from "@/components/admin/analytics/social-performance"
 import { CampaignPerformance } from "@/components/admin/analytics/campaign-performance"
 import { DateRangePicker } from "@/components/ui/date-range-picker"
+import type { DateRange } from "react-day-picker"
 
 export default function AnalyticsPage() {
   const [activeTab, setActiveTab] = useState("overview")
-  const [dateRange, setDateRange] = useState({ from: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), to: new Date() })
+  const [dateRange, setDateRange] = useState<DateRange>({
+    from: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
+    to: new Date(),
+  })
 
   return (
     <div className="space-y-6">

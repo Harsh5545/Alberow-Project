@@ -1,50 +1,49 @@
 "use client"
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Badge } from "@/components/ui/badge"
-import { TrendingUp, TrendingDown } from "lucide-react"
+import { ArrowUpRight, ArrowDownRight, Minus } from "lucide-react"
 
 export function TopPages() {
   const pages = [
     {
-      page: "Home",
-      views: 12345,
-      avgTime: "1m 32s",
-      bounceRate: 28.4,
-      trend: "up",
-      change: "+5.2%",
-    },
-    {
-      page: "Services",
-      views: 8765,
-      avgTime: "2m 15s",
-      bounceRate: 34.2,
-      trend: "up",
-      change: "+3.8%",
-    },
-    {
-      page: "About",
-      views: 6543,
-      avgTime: "1m 47s",
-      bounceRate: 30.1,
-      trend: "down",
-      change: "-1.3%",
-    },
-    {
-      page: "Blog",
-      views: 5432,
-      avgTime: "3m 22s",
-      bounceRate: 25.7,
-      trend: "up",
-      change: "+7.6%",
-    },
-    {
-      page: "Contact",
-      views: 4321,
-      avgTime: "1m 05s",
+      path: "/",
+      title: "Home Page",
+      views: 12450,
+      change: 8.1,
       bounceRate: 42.3,
-      trend: "down",
-      change: "-2.1%",
+      avgTime: "1m 23s",
+    },
+    {
+      path: "/services",
+      title: "Services",
+      views: 8320,
+      change: 12.5,
+      bounceRate: 38.7,
+      avgTime: "2m 12s",
+    },
+    {
+      path: "/blog",
+      title: "Blog",
+      views: 6540,
+      change: -2.3,
+      bounceRate: 45.1,
+      avgTime: "3m 05s",
+    },
+    {
+      path: "/about",
+      title: "About Us",
+      views: 4280,
+      change: 0,
+      bounceRate: 41.8,
+      avgTime: "1m 45s",
+    },
+    {
+      path: "/contact",
+      title: "Contact",
+      views: 3120,
+      change: 5.7,
+      bounceRate: 35.2,
+      avgTime: "1m 12s",
     },
   ]
 
@@ -54,29 +53,36 @@ export function TopPages() {
         <TableRow>
           <TableHead>Page</TableHead>
           <TableHead className="text-right">Views</TableHead>
-          <TableHead className="text-right">Avg. Time</TableHead>
+          <TableHead className="text-right">Change</TableHead>
           <TableHead className="text-right">Bounce Rate</TableHead>
-          <TableHead className="text-right">Trend</TableHead>
+          <TableHead className="text-right">Avg. Time</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {pages.map((page, i) => (
-          <TableRow key={i}>
-            <TableCell className="font-medium">{page.page}</TableCell>
-            <TableCell className="text-right">{page.views.toLocaleString()}</TableCell>
-            <TableCell className="text-right">{page.avgTime}</TableCell>
-            <TableCell className="text-right">{page.bounceRate}%</TableCell>
-            <TableCell className="text-right">
-              <Badge
-                variant="outline"
-                className={`flex items-center gap-1 ${
-                  page.trend === "up" ? "text-green-500 border-green-500" : "text-red-500 border-red-500"
-                }`}
-              >
-                {page.trend === "up" ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
-                {page.change}
-              </Badge>
+        {pages.map((page) => (
+          <TableRow key={page.path}>
+            <TableCell>
+              <div className="font-medium">{page.title}</div>
+              <div className="text-sm text-muted-foreground">{page.path}</div>
             </TableCell>
+            <TableCell className="text-right">{page.views.toLocaleString()}</TableCell>
+            <TableCell className="text-right">
+              {page.change > 0 ? (
+                <span className="text-emerald-500 font-medium inline-flex items-center">
+                  <ArrowUpRight className="mr-1 h-4 w-4" /> {page.change}%
+                </span>
+              ) : page.change < 0 ? (
+                <span className="text-rose-500 font-medium inline-flex items-center">
+                  <ArrowDownRight className="mr-1 h-4 w-4" /> {Math.abs(page.change)}%
+                </span>
+              ) : (
+                <span className="text-muted-foreground font-medium inline-flex items-center">
+                  <Minus className="mr-1 h-4 w-4" /> {page.change}%
+                </span>
+              )}
+            </TableCell>
+            <TableCell className="text-right">{page.bounceRate}%</TableCell>
+            <TableCell className="text-right">{page.avgTime}</TableCell>
           </TableRow>
         ))}
       </TableBody>

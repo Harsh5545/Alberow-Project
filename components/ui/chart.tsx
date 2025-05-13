@@ -179,16 +179,28 @@ export function BarChart({
 export function PieChart({
   data,
   index,
+  category,
   categories,
   colors = ["#8b5cf6", "#ec4899", "#10b981", "#3b82f6", "#f97316"],
   valueFormatter = (value: number) => `${value}`,
   className,
-}: ChartProps) {
+}: {
+  data: any[]
+  index: string
+  category?: string
+  categories?: string[]
+  colors?: string[]
+  valueFormatter?: (value: number) => string
+  className?: string
+}) {
+  // Use category prop if provided, otherwise use first item from categories array
+  const dataKey = category || (categories && categories[0]) || "value"
+
   const chartData: ChartData<"pie"> = {
     labels: data.map((item) => item[index]),
     datasets: [
       {
-        data: data.map((item) => item[categories[0]]),
+        data: data.map((item) => item[dataKey]),
         backgroundColor: colors.slice(0, data.length),
         borderWidth: 1,
         borderColor: "#fff",
@@ -225,16 +237,28 @@ export function PieChart({
 export function DoughnutChart({
   data,
   index,
+  category,
   categories,
   colors = ["#8b5cf6", "#ec4899", "#10b981", "#3b82f6", "#f97316"],
   valueFormatter = (value: number) => `${value}`,
   className,
-}: ChartProps) {
+}: {
+  data: any[]
+  index: string
+  category?: string
+  categories?: string[]
+  colors?: string[]
+  valueFormatter?: (value: number) => string
+  className?: string
+}) {
+  // Use category prop if provided, otherwise use first item from categories array
+  const dataKey = category || (categories && categories[0]) || "value"
+
   const chartData: ChartData<"doughnut"> = {
     labels: data.map((item) => item[index]),
     datasets: [
       {
-        data: data.map((item) => item[categories[0]]),
+        data: data.map((item) => item[dataKey]),
         backgroundColor: colors.slice(0, data.length),
         borderWidth: 1,
         borderColor: "#fff",

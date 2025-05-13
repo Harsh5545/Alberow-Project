@@ -5,56 +5,51 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 
 export function CampaignPerformance() {
-  const campaigns = [
+  const campaignData = [
     {
       name: "Summer Sale 2023",
       status: "Active",
-      budget: 5000,
-      spent: 3250,
-      impressions: 125000,
-      clicks: 4200,
-      conversions: 168,
-      roi: 320,
+      budget: "$5,000",
+      spent: "$3,240",
+      progress: 65,
+      leads: 124,
+      conversions: 38,
     },
     {
       name: "Product Launch",
       status: "Active",
-      budget: 8000,
-      spent: 6400,
-      impressions: 210000,
-      clicks: 7800,
-      conversions: 312,
-      roi: 480,
+      budget: "$8,500",
+      spent: "$6,800",
+      progress: 80,
+      leads: 215,
+      conversions: 62,
     },
     {
       name: "Holiday Special",
       status: "Scheduled",
-      budget: 6000,
-      spent: 0,
-      impressions: 0,
-      clicks: 0,
+      budget: "$4,200",
+      spent: "$0",
+      progress: 0,
+      leads: 0,
       conversions: 0,
-      roi: 0,
     },
     {
       name: "Brand Awareness",
-      status: "Completed",
-      budget: 3500,
-      spent: 3500,
-      impressions: 95000,
-      clicks: 3100,
-      conversions: 124,
-      roi: 280,
+      status: "Active",
+      budget: "$3,000",
+      spent: "$1,850",
+      progress: 62,
+      leads: 87,
+      conversions: 24,
     },
     {
-      name: "Retargeting",
-      status: "Active",
-      budget: 2500,
-      spent: 1800,
-      impressions: 68000,
-      clicks: 2900,
-      conversions: 145,
-      roi: 520,
+      name: "Spring Promotion",
+      status: "Completed",
+      budget: "$2,500",
+      spent: "$2,500",
+      progress: 100,
+      leads: 96,
+      conversions: 31,
     },
   ]
 
@@ -65,51 +60,36 @@ export function CampaignPerformance() {
           <TableHead>Campaign</TableHead>
           <TableHead>Status</TableHead>
           <TableHead>Budget</TableHead>
-          <TableHead>Impressions</TableHead>
-          <TableHead>Clicks</TableHead>
-          <TableHead>Conversions</TableHead>
-          <TableHead>ROI</TableHead>
+          <TableHead>Progress</TableHead>
+          <TableHead className="text-right">Leads</TableHead>
+          <TableHead className="text-right">Conversions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {campaigns.map((campaign, i) => (
-          <TableRow key={i}>
-            <TableCell className="font-medium">
-              <div>{campaign.name}</div>
-              {campaign.status === "Active" && (
-                <div className="mt-1">
-                  <Progress value={(campaign.spent / campaign.budget) * 100} className="h-2" />
-                  <div className="text-xs text-muted-foreground mt-1">
-                    ${campaign.spent.toLocaleString()} of ${campaign.budget.toLocaleString()} spent
-                  </div>
-                </div>
-              )}
-            </TableCell>
+        {campaignData.map((campaign) => (
+          <TableRow key={campaign.name}>
+            <TableCell className="font-medium">{campaign.name}</TableCell>
             <TableCell>
               <Badge
-                variant="outline"
-                className={
-                  campaign.status === "Active"
-                    ? "border-green-500 text-green-500"
-                    : campaign.status === "Completed"
-                      ? "border-blue-500 text-blue-500"
-                      : "border-amber-500 text-amber-500"
+                variant={
+                  campaign.status === "Active" ? "default" : campaign.status === "Completed" ? "outline" : "secondary"
                 }
               >
                 {campaign.status}
               </Badge>
             </TableCell>
-            <TableCell>${campaign.budget.toLocaleString()}</TableCell>
-            <TableCell>{campaign.impressions.toLocaleString()}</TableCell>
-            <TableCell>{campaign.clicks.toLocaleString()}</TableCell>
-            <TableCell>{campaign.conversions.toLocaleString()}</TableCell>
             <TableCell>
-              {campaign.roi > 0 ? (
-                <span className="text-green-500">{campaign.roi}%</span>
-              ) : (
-                <span className="text-muted-foreground">-</span>
-              )}
+              {campaign.budget}
+              <div className="text-xs text-muted-foreground">Spent: {campaign.spent}</div>
             </TableCell>
+            <TableCell>
+              <div className="flex items-center gap-2">
+                <Progress value={campaign.progress} className="h-2" />
+                <span className="text-xs text-muted-foreground">{campaign.progress}%</span>
+              </div>
+            </TableCell>
+            <TableCell className="text-right">{campaign.leads}</TableCell>
+            <TableCell className="text-right">{campaign.conversions}</TableCell>
           </TableRow>
         ))}
       </TableBody>

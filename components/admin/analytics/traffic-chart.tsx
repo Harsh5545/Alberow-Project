@@ -4,26 +4,26 @@ import { LineChart } from "@/components/ui/chart"
 
 export function TrafficChart() {
   const data = [
-    { date: "Jan", visitors: 1200, pageViews: 3800 },
-    { date: "Feb", visitors: 1900, pageViews: 4600 },
-    { date: "Mar", visitors: 1500, pageViews: 4200 },
-    { date: "Apr", visitors: 1700, pageViews: 5100 },
-    { date: "May", visitors: 2100, pageViews: 5800 },
-    { date: "Jun", visitors: 2400, pageViews: 6300 },
-    { date: "Jul", visitors: 2200, pageViews: 6100 },
-    { date: "Aug", visitors: 2600, pageViews: 7200 },
-    { date: "Sep", visitors: 2900, pageViews: 7800 },
-    { date: "Oct", visitors: 3100, pageViews: 8300 },
-    { date: "Nov", visitors: 3300, pageViews: 8900 },
-    { date: "Dec", visitors: 3500, pageViews: 9500 },
+    { date: "Jan 1", visitors: 1420, pageviews: 3240 },
+    { date: "Jan 8", visitors: 1620, pageviews: 3680 },
+    { date: "Jan 15", visitors: 1780, pageviews: 4120 },
+    { date: "Jan 22", visitors: 1950, pageviews: 4560 },
+    { date: "Jan 29", visitors: 2120, pageviews: 5080 },
+    { date: "Feb 5", visitors: 2340, pageviews: 5620 },
+    { date: "Feb 12", visitors: 2580, pageviews: 6240 },
+    { date: "Feb 19", visitors: 2780, pageviews: 6760 },
+    { date: "Feb 26", visitors: 3000, pageviews: 7280 },
+    { date: "Mar 5", visitors: 3210, pageviews: 7840 },
+    { date: "Mar 12", visitors: 3450, pageviews: 8320 },
+    { date: "Mar 19", visitors: 3680, pageviews: 8960 },
   ]
 
   return (
     <LineChart
       data={data}
       index="date"
-      categories={["visitors", "pageViews"]}
-      colors={["#8b5cf6", "#ec4899"]}
+      categories={["visitors", "pageviews"]}
+      colors={["#8b5cf6", "#10b981"]}
       valueFormatter={(value) => `${value.toLocaleString()}`}
       className="h-[300px]"
     />
