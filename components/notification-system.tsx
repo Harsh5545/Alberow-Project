@@ -1,284 +1,218 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Bell, X, Check, Info, AlertTriangle } from "lucide-react"
+import { X, Bell, Info, CheckCircle, AlertTriangle, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Switch } from "@/components/ui/switch"
-import { Label } from "@/components/ui/label"
+import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
-export type NotificationType = "info" | "success" | "warning" | "error"
+type NotificationType = "info" | "success" | "warning" | "error"
 
-export interface Notification {
+interface Notification {
   id: string
   title: string
   message: string
   type: NotificationType
-  timestamp: Date
-  read: boolean
-  link?: string
+  duration?: number
+  action?: {
+    label: string
+    onClick: () => void
+  }
 }
 
-interface NotificationSystemProps {
-  className?: string
-}
-
-export const NotificationSystem = ({ className }: NotificationSystemProps) => {
+export function NotificationSystem() {
   const [notifications, setNotifications] = useState<Notification[]>([])
-  const [showNotifications, setShowNotifications] = useState(false)
-  const [notificationCount, setNotificationCount] = useState(0)
-  const [notificationsEnabled, setNotificationsEnabled] = useState(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("notificationsEnabled") === "true"
-    }
-    return false
-  })
+  const [isOpen, setIsOpen] = useState(false)
+  const [unreadCount, setUnreadCount] = useState(0)
 
-  // Load notifications from localStorage on component mount
+  // Mock notifications for demo purposes
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const savedNotifications = localStorage.getItem("notifications")
-      if (savedNotifications) {
-        const parsedNotifications = JSON.parse(savedNotifications).map((n: any) => ({
-          ...n,
-          timestamp: new Date(n.timestamp),
-        }))
-        setNotifications(parsedNotifications)
-        setNotificationCount(parsedNotifications.filter((n: Notification) => !n.read).length)
-      }
+    // Simulate receiving notifications
+    const mockNotifications: Notification[] = [
+      {
+        id: "1",
+        title: "Project Updated",
+        message: "Website Redesign project has been updated with new files.",
+        type: "info",
+        duration: 5000,
+      },
+      {
+        id: "2",
+        title: "Task Completed",
+        message: "Homepage design task has been marked as complete.",
+        type: "success",
+        duration: 5000,
+      },
+      {
+        id: "3",
+        title: "Meeting Reminder",
+        message: "Client meeting in 30 minutes.",
+        type: "warning",
+        duration: 8000,
+        action: {
+          label: "Join Now",
+          onClick: () => console.log("Joining meeting..."),
+        },
+      },
+    ]
 
-      // Check if we should show the notification popup based on last close time
-      const lastClosedTime = localStorage.getItem("notificationLastClosed")
-      if (lastClosedTime) {
-        const hoursSinceLastClosed = (Date.now() - Number.parseInt(lastClosedTime)) / (1000 * 60 * 60)
-        if (hoursSinceLastClosed < 30) {
-          // Don't show if less than 30 hours have passed
-          return
-        }
-      }
-    }
+    setUnreadCount(mockNotifications.length)
+
+    // Add a slight delay to simulate notifications coming in
+    const timer = setTimeout(() => {
+      setNotifications(mockNotifications)
+    }, 2000)
+
+    return () => clearTimeout(timer)
   }, [])
 
-  // Save notifications to localStorage whenever they change
-  useEffect(() => {
-    if (typeof window !== "undefined" && notifications.length > 0) {
-      localStorage.setItem("notifications", JSON.stringify(notifications))
-      setNotificationCount(notifications.filter((n) => !n.read).length)
-    }
-  }, [notifications])
-
-  // Save notification preferences
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("notificationsEnabled", notificationsEnabled.toString())
-    }
-  }, [notificationsEnabled])
-
-  const toggleNotifications = () => {
-    setShowNotifications(!showNotifications)
-    if (!showNotifications) {
-      // Mark all as read when opening
-      setNotifications(notifications.map((n) => ({ ...n, read: true })))
-      setNotificationCount(0)
-    }
-  }
-
-  const handleNotificationToggle = (checked: boolean) => {
-    setNotificationsEnabled(checked)
-
-    // If enabling notifications, request browser permission
-    if (checked && typeof window !== "undefined" && "Notification" in window) {
-      Notification.requestPermission()
-    }
-  }
-
-  const closeNotifications = () => {
-    setShowNotifications(false)
-    // Store the time when notifications were closed
-    if (typeof window !== "undefined") {
-      localStorage.setItem("notificationLastClosed", Date.now().toString())
-    }
-  }
-
   const removeNotification = (id: string) => {
-    setNotifications(notifications.filter((n) => n.id !== id))
+    setNotifications((prev) => prev.filter((notification) => notification.id !== id))
+    setUnreadCount((prev) => Math.max(0, prev - 1))
   }
 
   const clearAllNotifications = () => {
     setNotifications([])
-    setNotificationCount(0)
+    setUnreadCount(0)
   }
 
-  // Function to add a new notification (can be called from other components)
-  const addNotification = (notification: Omit<Notification, "id" | "timestamp" | "read">) => {
-    const newNotification: Notification = {
-      ...notification,
-      id: Date.now().toString(),
-      timestamp: new Date(),
-      read: false,
-    }
-
-    setNotifications((prev) => [newNotification, ...prev])
-    setNotificationCount((prev) => prev + 1)
-
-    // Show browser notification if enabled
-    if (
-      notificationsEnabled &&
-      typeof window !== "undefined" &&
-      "Notification" in window &&
-      Notification.permission === "granted"
-    ) {
-      new Notification(notification.title, {
-        body: notification.message,
-      })
+  const toggleNotificationPanel = () => {
+    setIsOpen(!isOpen)
+    if (!isOpen) {
+      setUnreadCount(0)
     }
   }
-
-  // Expose the addNotification function to the window object
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      ;(window as any).addNotification = addNotification
-    }
-
-    return () => {
-      if (typeof window !== "undefined") {
-        delete (window as any).addNotification
-      }
-    }
-  }, [])
 
   const getNotificationIcon = (type: NotificationType) => {
     switch (type) {
-      case "success":
-        return <Check className="h-4 w-4 text-green-500" />
-      case "warning":
-        return <AlertTriangle className="h-4 w-4 text-amber-500" />
-      case "error":
-        return <X className="h-4 w-4 text-red-500" />
       case "info":
-      default:
-        return <Info className="h-4 w-4 text-blue-500" />
+        return <Info className="h-5 w-5 text-blue-500" />
+      case "success":
+        return <CheckCircle className="h-5 w-5 text-green-500" />
+      case "warning":
+        return <AlertTriangle className="h-5 w-5 text-yellow-500" />
+      case "error":
+        return <AlertCircle className="h-5 w-5 text-red-500" />
     }
   }
 
   const getNotificationColor = (type: NotificationType) => {
     switch (type) {
-      case "success":
-        return "bg-green-50 border-green-200"
-      case "warning":
-        return "bg-amber-50 border-amber-200"
-      case "error":
-        return "bg-red-50 border-red-200"
       case "info":
-      default:
-        return "bg-blue-50 border-blue-200"
+        return "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800"
+      case "success":
+        return "bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800"
+      case "warning":
+        return "bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800"
+      case "error":
+        return "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800"
     }
   }
 
+  // Auto-dismiss notifications after their duration
+  useEffect(() => {
+    const timers = notifications.map((notification) => {
+      if (notification.duration) {
+        return setTimeout(() => {
+          removeNotification(notification.id)
+        }, notification.duration)
+      }
+      return undefined
+    })
+
+    return () => {
+      timers.forEach((timer) => {
+        if (timer) clearTimeout(timer)
+      })
+    }
+  }, [notifications])
+
   return (
-    <div className={cn("relative", className)}>
-      <Button variant="ghost" size="icon" className="relative" onClick={toggleNotifications} aria-label="Notifications">
-        <Bell className="h-5 w-5" />
-        {notificationCount > 0 && (
-          <Badge
-            className="absolute -top-1 -right-1 px-1.5 py-0.5 min-w-[1.25rem] h-5 flex items-center justify-center"
-            variant="destructive"
-          >
-            {notificationCount}
-          </Badge>
+    <>
+      {/* Notification Bell */}
+      <div className="fixed top-4 right-4 z-50">
+        <Button
+          variant="outline"
+          size="icon"
+          className="relative rounded-full h-10 w-10 bg-background shadow-md"
+          onClick={toggleNotificationPanel}
+        >
+          <Bell className="h-5 w-5" />
+          {unreadCount > 0 && (
+            <span className="absolute top-0 right-0 h-4 w-4 rounded-full bg-red-500 text-[10px] font-medium text-white flex items-center justify-center transform translate-x-1 -translate-y-1">
+              {unreadCount}
+            </span>
+          )}
+        </Button>
+      </div>
+
+      {/* Notification Panel */}
+      <div
+        className={cn(
+          "fixed top-16 right-4 z-50 w-80 bg-background border rounded-lg shadow-lg transition-all duration-200 transform",
+          isOpen ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0 pointer-events-none",
         )}
-      </Button>
-
-      {showNotifications && (
-        <Card className="absolute right-0 mt-2 w-80 sm:w-96 max-h-[80vh] overflow-hidden z-50 shadow-lg">
-          <CardHeader className="pb-2 flex flex-row items-center justify-between">
-            <div>
-              <CardTitle>Notifications</CardTitle>
-              <CardDescription>Stay updated with the latest news</CardDescription>
-            </div>
-            <Button variant="ghost" size="icon" onClick={closeNotifications}>
-              <X className="h-4 w-4" />
-            </Button>
-          </CardHeader>
-
-          <div className="px-4 py-2 border-t border-b flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Switch
-                id="notifications-toggle"
-                checked={notificationsEnabled}
-                onCheckedChange={handleNotificationToggle}
-              />
-              <Label htmlFor="notifications-toggle">Enable notifications</Label>
-            </div>
-
+      >
+        <div className="p-3 border-b flex items-center justify-between">
+          <h3 className="font-medium">Notifications</h3>
+          <div className="flex items-center gap-1">
             {notifications.length > 0 && (
-              <Button variant="ghost" size="sm" onClick={clearAllNotifications} className="text-xs">
-                Clear all
+              <Button variant="ghost" size="sm" onClick={clearAllNotifications} className="h-8 text-xs">
+                Clear All
               </Button>
             )}
+            <Button variant="ghost" size="icon" onClick={toggleNotificationPanel} className="h-8 w-8">
+              <X className="h-4 w-4" />
+            </Button>
           </div>
+        </div>
 
-          <div className="overflow-y-auto max-h-[50vh]">
-            {notifications.length === 0 ? (
-              <div className="p-6 text-center text-muted-foreground">No notifications yet</div>
-            ) : (
-              notifications.map((notification) => (
-                <div
+        <div className="max-h-[70vh] overflow-y-auto">
+          {notifications.length > 0 ? (
+            <div className="p-2 space-y-2">
+              {notifications.map((notification) => (
+                <Card
                   key={notification.id}
-                  className={cn(
-                    "p-3 border-b last:border-b-0 relative",
-                    !notification.read && "bg-muted/30",
-                    getNotificationColor(notification.type),
-                  )}
+                  className={cn("p-3 border shadow-sm", getNotificationColor(notification.type))}
                 >
                   <div className="flex items-start gap-3">
                     <div className="mt-0.5">{getNotificationIcon(notification.type)}</div>
                     <div className="flex-1">
-                      <div className="font-medium text-sm">{notification.title}</div>
-                      <p className="text-sm text-muted-foreground">{notification.message}</p>
-                      <div className="text-xs text-muted-foreground mt-1">
-                        {notification.timestamp.toLocaleString()}
+                      <div className="flex items-start justify-between gap-2">
+                        <h4 className="font-medium text-sm">{notification.title}</h4>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => removeNotification(notification.id)}
+                          className="h-5 w-5 -mt-1 -mr-1"
+                        >
+                          <X className="h-3 w-3" />
+                        </Button>
                       </div>
-                      {notification.link && (
-                        <a href={notification.link} className="text-xs text-primary hover:underline mt-1 block">
-                          View details
-                        </a>
+                      <p className="text-sm text-muted-foreground mt-1">{notification.message}</p>
+                      {notification.action && (
+                        <Button
+                          variant="link"
+                          size="sm"
+                          className="h-auto p-0 mt-1 text-xs"
+                          onClick={notification.action.onClick}
+                        >
+                          {notification.action.label}
+                        </Button>
                       )}
                     </div>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-6 w-6"
-                      onClick={() => removeNotification(notification.id)}
-                    >
-                      <X className="h-3 w-3" />
-                    </Button>
                   </div>
-                </div>
-              ))
-            )}
-          </div>
-
-          <CardFooter className="flex justify-between pt-2">
-            <Button variant="outline" size="sm" onClick={closeNotifications}>
-              Close
-            </Button>
-            {notificationsEnabled ? (
-              <Badge variant="outline" className="ml-auto">
-                Notifications enabled
-              </Badge>
-            ) : (
-              <Badge variant="outline" className="ml-auto bg-muted">
-                Notifications disabled
-              </Badge>
-            )}
-          </CardFooter>
-        </Card>
-      )}
-    </div>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div className="py-8 text-center text-muted-foreground">
+              <Bell className="h-8 w-8 mx-auto mb-2 opacity-50" />
+              <p>No notifications</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
   )
 }
-
-export default NotificationSystem

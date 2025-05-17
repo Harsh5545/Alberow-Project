@@ -1,168 +1,190 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { cn } from "@/lib/utils"
+import { ModeToggle } from "@/components/mode-toggle"
 import {
   LayoutDashboard,
   FileText,
   Users,
   Settings,
-  FolderOpen,
   MessageSquare,
   BarChart3,
-  Building2,
+  LogOut,
+  ChevronLeft,
+  ChevronRight,
   Menu,
+  Bell,
+  Briefcase,
+  FileImage,
+  UserPlus,
+  ShieldCheck,
+  Megaphone,
   X,
-  BellRing,
-  Share2,
 } from "lucide-react"
 
-interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
-  isCollapsed?: boolean
-}
-
-export function AdminSidebar({ className, isCollapsed = false }: SidebarProps) {
+export function AdminSidebar() {
   const pathname = usePathname()
-  const [isOpen, setIsOpen] = useState(false)
+  const [collapsed, setCollapsed] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    // Check if we're on mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+      if (window.innerWidth < 1024) {
+        setCollapsed(true)
+      }
+    }
+
+    // Initial check
+    checkMobile()
+
+    // Add event listener
+    window.addEventListener("resize", checkMobile)
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
+
+  // Close mobile sidebar when route changes
+  useEffect(() => {
+    setMobileOpen(false)
+  }, [pathname])
 
   const toggleSidebar = () => {
-    setIsOpen(!isOpen)
+    if (isMobile) {
+      setMobileOpen(!mobileOpen)
+    } else {
+      setCollapsed(!collapsed)
+    }
   }
 
-  const routes = [
-    {
-      label: "Dashboard",
-      icon: LayoutDashboard,
-      href: "/admin",
-      active: pathname === "/admin",
-    },
-    {
-      label: "Blog",
-      icon: FileText,
-      href: "/admin/blog",
-      active: pathname.includes("/admin/blog"),
-    },
-    {
-      label: "Projects",
-      icon: FolderOpen,
-      href: "/admin/projects",
-      active: pathname.includes("/admin/projects"),
-    },
-    {
-      label: "Team",
-      icon: Users,
-      href: "/admin/team",
-      active: pathname.includes("/admin/team"),
-    },
-    {
-      label: "Clients",
-      icon: Building2,
-      href: "/admin/clients",
-      active: pathname.includes("/admin/clients"),
-    },
-    {
-      label: "Messages",
-      icon: MessageSquare,
-      href: "/admin/messages",
-      active: pathname.includes("/admin/messages"),
-    },
-    {
-      label: "Marketing",
-      icon: Share2,
-      href: "/admin/marketing",
-      active: pathname.includes("/admin/marketing"),
-    },
-    {
-      label: "Notifications",
-      icon: BellRing,
-      href: "/admin/notifications",
-      active: pathname.includes("/admin/notifications"),
-    },
-    {
-      label: "Files",
-      icon: FolderOpen,
-      href: "/admin/files",
-      active: pathname.includes("/admin/files"),
-    },
-    {
-      label: "Analytics",
-      icon: BarChart3,
-      href: "/admin/analytics",
-      active: pathname.includes("/admin/analytics"),
-    },
-    {
-      label: "Settings",
-      icon: Settings,
-      href: "/admin/settings",
-      active: pathname.includes("/admin/settings"),
-    },
+  const isActive = (path: string) => {
+    if (path === "/admin" && pathname === "/admin") {
+      return true
+    }
+    if (path !== "/admin" && pathname.startsWith(path)) {
+      return true
+    }
+    return false
+  }
+
+  const sidebarItems = [
+    { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
+    { name: "Projects", href: "/admin/projects", icon: Briefcase },
+    { name: "Blog", href: "/admin/blog", icon: FileText },
+    { name: "Team", href: "/admin/team", icon: Users },
+    { name: "Clients", href: "/admin/clients", icon: UserPlus },
+    { name: "Messages", href: "/admin/messages", icon: MessageSquare },
+    { name: "Marketing", href: "/admin/marketing", icon: Megaphone },
+    { name: "Analytics", href: "/admin/analytics", icon: BarChart3 },
+    { name: "Files", href: "/admin/files", icon: FileImage },
+    { name: "Notifications", href: "/admin/notifications", icon: Bell },
+    { name: "Roles", href: "/admin/roles", icon: ShieldCheck },
+    { name: "Settings", href: "/admin/settings", icon: Settings },
   ]
 
   return (
     <>
+      {/* Mobile overlay */}
+      {isMobile && mobileOpen && (
+        <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={() => setMobileOpen(false)} />
+      )}
+
+      {/* Mobile toggle button */}
       <Button
         variant="ghost"
         size="icon"
-        className="md:hidden fixed top-4 left-4 z-50"
+        className="fixed top-4 left-4 z-50 lg:hidden"
         onClick={toggleSidebar}
-        aria-label="Toggle Menu"
+        aria-label={mobileOpen ? "Close sidebar" : "Open sidebar"}
       >
-        {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </Button>
 
-      <div
-        className={cn("fixed inset-0 z-40 bg-background/80 backdrop-blur-sm md:hidden", isOpen ? "block" : "hidden")}
-        onClick={toggleSidebar}
-      />
-
+      {/* Sidebar */}
       <aside
-        className={cn(
-          "fixed top-0 left-0 z-40 h-full w-64 border-r bg-background transition-transform md:translate-x-0",
-          isOpen ? "translate-x-0" : "-translate-x-full",
-          isCollapsed && "w-[70px]",
-          className,
-        )}
+        className={`fixed top-0 left-0 z-40 h-screen bg-background border-r transition-all duration-300 ${
+          collapsed && !mobileOpen ? "w-[70px]" : "w-64"
+        } ${isMobile && !mobileOpen ? "-translate-x-full" : "translate-x-0"}`}
       >
-        <div className="flex h-14 items-center px-4 border-b">
-          <Link href="/admin" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center text-white font-bold">
-              A
-            </div>
-            {!isCollapsed && (
-              <div className="font-bold text-xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Alberow
+        <div className="flex flex-col h-full">
+          <div className="h-16 flex items-center px-4 border-b">
+            {!collapsed || mobileOpen ? (
+              <div className="flex items-center justify-between w-full">
+                <Link
+                  href="/admin"
+                  className="font-bold text-xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+                >
+                  Alberow
+                </Link>
+                <Button variant="ghost" size="icon" onClick={toggleSidebar} className="lg:flex hidden">
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center w-full">
+                <Button variant="ghost" size="icon" onClick={toggleSidebar} className="lg:flex hidden">
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
               </div>
             )}
-          </Link>
-        </div>
-        <ScrollArea className="h-[calc(100vh-3.5rem)]">
-          <div className="px-3 py-4">
-            <nav className="flex flex-col gap-1">
-              {routes.map((route, i) => (
+          </div>
+
+          <ScrollArea className="flex-1 py-2">
+            <nav className="px-2 space-y-1">
+              {sidebarItems.map((item) => (
                 <Link
-                  key={i}
-                  href={route.href}
-                  onClick={() => setIsOpen(false)}
-                  className={cn(
-                    "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
-                    route.active
-                      ? "bg-primary text-primary-foreground"
-                      : "hover:bg-muted text-foreground/70 hover:text-foreground",
-                  )}
+                  key={item.href}
+                  href={item.href}
+                  className={`flex items-center px-2 py-2 rounded-md transition-colors ${
+                    isActive(item.href)
+                      ? "bg-primary/10 text-primary"
+                      : "text-foreground/70 hover:bg-muted hover:text-foreground"
+                  } ${collapsed && !mobileOpen ? "justify-center" : ""}`}
                 >
-                  <route.icon className="h-5 w-5" />
-                  {!isCollapsed && <span>{route.label}</span>}
+                  <item.icon className={`h-5 w-5 ${isActive(item.href) ? "text-primary" : ""}`} />
+                  {(!collapsed || mobileOpen) && <span className="ml-3 text-sm font-medium">{item.name}</span>}
                 </Link>
               ))}
             </nav>
+          </ScrollArea>
+
+          <div className="p-4 border-t">
+            <div className="flex items-center justify-between">
+              {!collapsed || mobileOpen ? (
+                <>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center text-white">
+                      A
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">Admin User</p>
+                      <p className="text-xs text-muted-foreground">admin@alberow.com</p>
+                    </div>
+                  </div>
+                  <ModeToggle />
+                </>
+              ) : (
+                <div className="w-full flex justify-center">
+                  <ModeToggle />
+                </div>
+              )}
+            </div>
+
+            {(!collapsed || mobileOpen) && (
+              <Button variant="outline" className="w-full mt-4">
+                <LogOut className="h-4 w-4 mr-2" />
+                Logout
+              </Button>
+            )}
           </div>
-        </ScrollArea>
+        </div>
       </aside>
     </>
   )

@@ -1,8 +1,12 @@
 "use client"
 
-import { useState } from "react"
-import { Bell, Search, User } from "lucide-react"
+import type React from "react"
+
+import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
+import { ModeToggle } from "@/components/mode-toggle"
+import { Search, Menu } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import {
   DropdownMenu,
@@ -12,84 +16,92 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { ModeToggle } from "@/components/mode-toggle"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { cn } from "@/lib/utils"
+import NotificationSystem from "@/components/notification-system"
 
-export function AdminHeader() {
-  const [searchQuery, setSearchQuery] = useState("")
+interface AdminHeaderProps {
+  children?: React.ReactNode
+}
+
+export function AdminHeader({ children }: AdminHeaderProps) {
+  const pathname = usePathname()
+  const [scrolled, setScrolled] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+
+  // Get page title from pathname
+  const getPageTitle = () => {
+    const path = pathname.split("/").filter(Boolean)
+    if (path.length === 1 && path[0] === "admin") return "Dashboard"
+
+    // Get the last segment of the path and capitalize it
+    const lastSegment = path[path.length - 1]
+    return lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1).replace(/-/g, " ")
+  }
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
-    <header className="border-b border-border/50 p-4 bg-background">
-      <div className="flex items-center justify-between">
-        <div className="relative w-full max-w-md">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-foreground/60" />
+    <header
+      className={cn(
+        "sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6",
+        scrolled && "shadow-sm",
+      )}
+    >
+      <div className="flex items-center gap-2 md:hidden">
+        <Button variant="outline" size="icon" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+          <Menu className="h-5 w-5" />
+          <span className="sr-only">Toggle Menu</span>
+        </Button>
+        <span className="font-semibold">{getPageTitle()}</span>
+      </div>
+
+      <div className="hidden md:block">
+        <h1 className="text-xl font-semibold">{getPageTitle()}</h1>
+      </div>
+
+      <div className="flex-1 md:grow-0 md:w-[200px] lg:w-[300px]">
+        <div className="relative">
+          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
             placeholder="Search..."
-            className="pl-10"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[300px]"
           />
         </div>
+      </div>
 
-        <div className="flex items-center space-x-2">
-          <ModeToggle />
+      <div className="ml-auto flex items-center gap-4">
+        <NotificationSystem />
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="h-5 w-5" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-80">
-              <DropdownMenuLabel>Notifications</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <div className="max-h-80 overflow-y-auto">
-                <DropdownMenuItem className="cursor-pointer py-3">
-                  <div>
-                    <p className="font-medium">New Contact Form Submission</p>
-                    <p className="text-sm text-foreground/70">John Doe submitted a contact form</p>
-                    <p className="text-xs text-foreground/50 mt-1">2 hours ago</p>
-                  </div>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer py-3">
-                  <div>
-                    <p className="font-medium">New Comment on Blog Post</p>
-                    <p className="text-sm text-foreground/70">Sarah commented on "SEO Strategies"</p>
-                    <p className="text-xs text-foreground/50 mt-1">5 hours ago</p>
-                  </div>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer py-3">
-                  <div>
-                    <p className="font-medium">Project Status Update</p>
-                    <p className="text-sm text-foreground/70">E-commerce project moved to testing phase</p>
-                    <p className="text-xs text-foreground/50 mt-1">Yesterday</p>
-                  </div>
-                </DropdownMenuItem>
-              </div>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem className="cursor-pointer text-center text-sm font-medium text-purple-600 dark:text-purple-400">
-                View All Notifications
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+        <ModeToggle />
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <User className="h-5 w-5" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" className="rounded-full">
+              <Avatar className="h-8 w-8">
+                <AvatarImage src="/placeholder.svg?height=32&width=32" alt="User" />
+                <AvatarFallback>JD</AvatarFallback>
+              </Avatar>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuItem>Billing</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Log out</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   )

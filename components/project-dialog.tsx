@@ -1,233 +1,258 @@
 "use client"
 
-import { useState } from "react"
-import { X, ExternalLink, Github, Linkedin, Twitter, Instagram } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import type React from "react"
+
+import { useState, useEffect, useRef } from "react"
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
+  DialogFooter,
 } from "@/components/ui/dialog"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { cn } from "@/lib/utils"
-
-export interface ProjectDetails {
-  id: string
-  title: string
-  description: string
-  image: string
-  category: string
-  technologies: string[]
-  features?: string[]
-  challenges?: string[]
-  results?: string[]
-  clientName?: string
-  clientFeedback?: string
-  projectUrl?: string
-  githubUrl?: string
-  socialLinks?: {
-    linkedin?: string
-    twitter?: string
-    instagram?: string
-  }
-  completionDate?: string
-}
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
+import { X } from "lucide-react"
 
 interface ProjectDialogProps {
-  project: ProjectDetails | null
-  open: boolean
-  onOpenChange: (open: boolean) => void
+  isOpen: boolean
+  onClose: () => void
+  project?: {
+    id: string
+    title: string
+    description: string
+    imageUrl: string
+    category: string
+    client: string
+    completionDate: string
+  }
+  mode: "view" | "edit" | "create"
 }
 
-export const ProjectDialog = ({ project, open, onOpenChange }: ProjectDialogProps) => {
-  const [activeTab, setActiveTab] = useState("overview")
+export function ProjectDialog({ isOpen, onClose, project, mode }: ProjectDialogProps) {
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    imageUrl: "",
+    category: "",
+    client: "",
+    completionDate: "",
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const dialogRef = useRef<HTMLDivElement>(null)
 
-  if (!project) return null
+  // Prevent body scroll when dialog is open and fix the page shift issue
+  useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).overflow
+    const originalPadding = window.getComputedStyle(document.body).paddingRight
+    const originalWidth = document.body.style.width
+
+    if (isOpen) {
+      // Calculate scrollbar width
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+
+      // Store original body width to prevent layout shift
+      const bodyWidth = document.body.clientWidth
+
+      document.body.style.overflow = "hidden"
+      document.body.style.paddingRight = `${scrollbarWidth}px`
+      document.body.style.width = `${bodyWidth}px`
+
+      // Set initial form data if in edit or view mode
+      if (project && (mode === "edit" || mode === "view")) {
+        setFormData({
+          title: project.title,
+          description: project.description,
+          imageUrl: project.imageUrl,
+          category: project.category,
+          client: project.client,
+          completionDate: project.completionDate,
+        })
+      }
+    }
+
+    return () => {
+      // Use requestAnimationFrame to prevent flickering during transition
+      requestAnimationFrame(() => {
+        document.body.style.overflow = originalStyle
+        document.body.style.paddingRight = originalPadding
+        document.body.style.width = originalWidth || ""
+      })
+    }
+  }, [isOpen, project, mode])
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      // API call would go here
+      console.log("Submitting project data:", formData)
+
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+
+      // Close dialog after successful submission
+      handleClose()
+    } catch (error) {
+      console.error("Error submitting project:", error)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleClose = () => {
+    // Use requestAnimationFrame to prevent layout shift
+    requestAnimationFrame(() => {
+      onClose()
+    })
+  }
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      // In a real app, you would upload the file to a server
+      // and get back a URL. For now, we'll create a local URL.
+      const localUrl = URL.createObjectURL(file)
+      setFormData((prev) => ({ ...prev, imageUrl: localUrl }))
+    }
+  }
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto">
+    <Dialog open={isOpen} onOpenChange={handleClose}>
+      <DialogContent
+        ref={dialogRef}
+        className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto"
+        onInteractOutside={(e) => e.preventDefault()} // Prevent closing on outside click during submission
+      >
         <DialogHeader>
           <div className="flex items-center justify-between">
-            <DialogTitle className="text-2xl">{project.title}</DialogTitle>
-            <Button variant="ghost" size="icon" onClick={() => onOpenChange(false)} className="absolute right-4 top-4">
+            <DialogTitle>
+              {mode === "create" ? "Create New Project" : mode === "edit" ? "Edit Project" : "Project Details"}
+            </DialogTitle>
+            <Button variant="ghost" size="icon" onClick={handleClose} className="h-8 w-8">
               <X className="h-4 w-4" />
             </Button>
           </div>
           <DialogDescription>
-            {project.category} • {project.completionDate || "Ongoing"}
+            {mode === "create"
+              ? "Add a new project to your portfolio"
+              : mode === "edit"
+                ? "Make changes to your project"
+                : "View project details"}
           </DialogDescription>
         </DialogHeader>
 
-        <div className="relative rounded-md overflow-hidden aspect-video mb-4">
-          <img src={project.image || "/placeholder.svg"} alt={project.title} className="w-full h-full object-cover" />
-        </div>
-
-        <Tabs defaultValue="overview" value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid grid-cols-4 mb-4">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="details">Details</TabsTrigger>
-            <TabsTrigger value="tech">Technology</TabsTrigger>
-            <TabsTrigger value="results">Results</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="overview" className="space-y-4">
-            <div>
-              <h3 className="text-lg font-medium mb-2">Project Description</h3>
-              <p className="text-muted-foreground">{project.description}</p>
+        <form onSubmit={handleSubmit} className="space-y-4 py-4">
+          <div className="grid grid-cols-1 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="title">Project Title</Label>
+              <Input
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                disabled={mode === "view" || isSubmitting}
+                required
+              />
             </div>
 
-            {project.clientName && (
-              <div>
-                <h3 className="text-lg font-medium mb-2">Client</h3>
-                <p className="text-muted-foreground">{project.clientName}</p>
-              </div>
-            )}
-
-            <div>
-              <h3 className="text-lg font-medium mb-2">Technologies</h3>
-              <div className="flex flex-wrap gap-2">
-                {project.technologies.map((tech) => (
-                  <Badge key={tech} variant="secondary">
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="description">Description</Label>
+              <Textarea
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                disabled={mode === "view" || isSubmitting}
+                rows={4}
+                required
+              />
             </div>
-          </TabsContent>
 
-          <TabsContent value="details" className="space-y-4">
-            {project.features && project.features.length > 0 && (
-              <div>
-                <h3 className="text-lg font-medium mb-2">Key Features</h3>
-                <ul className="list-disc pl-5 space-y-1">
-                  {project.features.map((feature, index) => (
-                    <li key={index} className="text-muted-foreground">
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {project.challenges && project.challenges.length > 0 && (
-              <div>
-                <h3 className="text-lg font-medium mb-2">Challenges</h3>
-                <ul className="list-disc pl-5 space-y-1">
-                  {project.challenges.map((challenge, index) => (
-                    <li key={index} className="text-muted-foreground">
-                      {challenge}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </TabsContent>
-
-          <TabsContent value="tech" className="space-y-4">
-            <div>
-              <h3 className="text-lg font-medium mb-2">Technology Stack</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {project.technologies.map((tech) => (
-                  <div key={tech} className="p-3 border rounded-md flex items-center justify-center text-center">
-                    {tech}
-                  </div>
-                ))}
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="category">Category</Label>
+              <Input
+                id="category"
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                disabled={mode === "view" || isSubmitting}
+                required
+              />
             </div>
-          </TabsContent>
 
-          <TabsContent value="results" className="space-y-4">
-            {project.results && project.results.length > 0 && (
-              <div>
-                <h3 className="text-lg font-medium mb-2">Project Outcomes</h3>
-                <ul className="list-disc pl-5 space-y-1">
-                  {project.results.map((result, index) => (
-                    <li key={index} className="text-muted-foreground">
-                      {result}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            <div className="space-y-2">
+              <Label htmlFor="client">Client</Label>
+              <Input
+                id="client"
+                name="client"
+                value={formData.client}
+                onChange={handleChange}
+                disabled={mode === "view" || isSubmitting}
+                required
+              />
+            </div>
 
-            {project.clientFeedback && (
-              <div>
-                <h3 className="text-lg font-medium mb-2">Client Feedback</h3>
-                <blockquote className="border-l-4 pl-4 italic text-muted-foreground">
-                  "{project.clientFeedback}"
-                </blockquote>
-              </div>
-            )}
-          </TabsContent>
-        </Tabs>
+            <div className="space-y-2">
+              <Label htmlFor="completionDate">Completion Date</Label>
+              <Input
+                id="completionDate"
+                name="completionDate"
+                type="date"
+                value={formData.completionDate}
+                onChange={handleChange}
+                disabled={mode === "view" || isSubmitting}
+                required
+              />
+            </div>
 
-        <DialogFooter
-          className={cn("flex-col sm:flex-row gap-2 sm:gap-0", "sm:justify-between items-center pt-4 border-t")}
-        >
-          <div className="flex items-center space-x-2">
-            {project.socialLinks?.linkedin && (
-              <a
-                href={project.socialLinks.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full hover:bg-muted"
-              >
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
-              </a>
-            )}
-            {project.socialLinks?.twitter && (
-              <a
-                href={project.socialLinks.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full hover:bg-muted"
-              >
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </a>
-            )}
-            {project.socialLinks?.instagram && (
-              <a
-                href={project.socialLinks.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full hover:bg-muted"
-              >
-                <Instagram className="h-5 w-5" />
-                <span className="sr-only">Instagram</span>
-              </a>
-            )}
+            <div className="space-y-2">
+              <Label htmlFor="image">Project Image</Label>
+              {mode !== "view" && (
+                <Input id="image" type="file" accept="image/*" onChange={handleImageUpload} disabled={isSubmitting} />
+              )}
+              {formData.imageUrl && (
+                <div className="mt-2 relative rounded-md overflow-hidden">
+                  <img
+                    src={formData.imageUrl || "/placeholder.svg"}
+                    alt="Project preview"
+                    className="w-full h-48 object-cover"
+                  />
+                </div>
+              )}
+            </div>
           </div>
 
-          <div className="flex space-x-2">
-            {project.githubUrl && (
-              <Button variant="outline" size="sm" asChild>
-                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center">
-                  <Github className="mr-2 h-4 w-4" />
-                  View Code
-                </a>
+          {mode !== "view" && (
+            <DialogFooter>
+              <Button type="button" variant="outline" onClick={handleClose} disabled={isSubmitting}>
+                Cancel
               </Button>
-            )}
-
-            {project.projectUrl && (
-              <Button size="sm" asChild>
-                <a href={project.projectUrl} target="_blank" rel="noopener noreferrer" className="flex items-center">
-                  <ExternalLink className="mr-2 h-4 w-4" />
-                  Visit Project
-                </a>
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    <span className="animate-spin mr-2 h-4 w-4 border-2 border-current border-t-transparent rounded-full"></span>
+                    {mode === "create" ? "Creating..." : "Saving..."}
+                  </>
+                ) : mode === "create" ? (
+                  "Create Project"
+                ) : (
+                  "Save Changes"
+                )}
               </Button>
-            )}
-          </div>
-        </DialogFooter>
+            </DialogFooter>
+          )}
+        </form>
       </DialogContent>
     </Dialog>
   )
 }
-
-export default ProjectDialog
