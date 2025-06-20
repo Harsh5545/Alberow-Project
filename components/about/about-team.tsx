@@ -1,64 +1,64 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
-import { Github, Linkedin, Twitter } from "lucide-react"
+import { Github, Linkedin, Instagram, User } from "lucide-react"
 
 const teamMembers = [
   {
     name: "Harsh Kajale",
     role: "Founder & Marketing Developer",
     bio: "With a passion for digital marketing and development, Harsh leads our team with innovative strategies and creative vision.",
-    image: "/placeholder.svg?height=400&width=400",
     social: {
-      linkedin: "#",
-      twitter: "#",
-      github: "#",
+      linkedin: "https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile",
+      instagram: "https://www.instagram.com/smartearnonline/",
+      github: "https://github.com/Harsh5545",
     },
   },
   {
     name: "Harsh Jaiswal",
     role: "Frontend Developer",
     bio: "Harsh specializes in creating beautiful, responsive user interfaces using the latest frontend technologies and frameworks.",
-    image: "/placeholder.svg?height=400&width=400",
     social: {
-      linkedin: "#",
-      twitter: "#",
-      github: "#",
+      linkedin: "https://www.linkedin.com/in/harsh-jaisw12/",
+      github: "https://github.com/Harsh-Jaisw",
     },
   },
   {
     name: "Bhavish",
     role: "Full Stack Developer",
     bio: "As our full-stack expert, Bhavish bridges the gap between frontend and backend, ensuring seamless integration and functionality.",
-    image: "/placeholder.svg?height=400&width=400",
     social: {
-      linkedin: "#",
-      twitter: "#",
-      github: "#",
+      linkedin: "https://www.linkedin.com/in/bhavishmuneshwar/",
+      instagram: "https://www.instagram.com/bhavish_muneshwar/",
+      github: "https://github.com/Bhavishm009",
     },
   },
   {
     name: "Yashvardhan Jaiswal",
     role: "Backend Developer",
     bio: "Yashvardhan builds robust, scalable backend systems that power our applications with efficiency and reliability.",
-    image: "/placeholder.svg?height=400&width=400",
     social: {
-      linkedin: "#",
-      twitter: "#",
-      github: "#",
+      instagram: "https://www.instagram.com/funkyheart_/",
+      linkedin: "https://www.linkedin.com/in/yashwardhan-jaiswal-13866a235/",
+      github: "https://github.com/yash13565",
     },
   },
   {
     name: "Divansaheb Sangale",
     role: "Offline Marketing Specialist",
     bio: "Divansaheb brings traditional marketing expertise to complement our digital strategies, creating comprehensive marketing solutions.",
-    image: "/placeholder.svg?height=400&width=400",
     social: {
-      linkedin: "#",
-      twitter: "#",
-      github: "#",
+      instagram: "https://www.instagram.com/divansangale/",
+    },
+  },
+  {
+    name: "Manasi Kadam",
+    role: "Digital Marketing Specialist",
+    bio: "Manasi excels in digital marketing strategies, social media management, and creating engaging content that drives brand awareness and growth.",
+    social: {
+      linkedin: "https://www.linkedin.com/in/k-manasi/",
+      instagram: "https://www.instagram.com/manasikadam_/",
     },
   },
 ]
@@ -99,42 +99,52 @@ export function AboutTeam() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -10 }}
             >
-              <Card className="overflow-hidden h-full border border-border/50 hover:border-purple-200 dark:hover:border-purple-800 transition-all duration-300 group">
-                <div className="relative overflow-hidden">
-                  <Image
-                    src={member.image || "/placeholder.svg"}
-                    alt={member.name}
-                    width={400}
-                    height={400}
-                    className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-4">
-                    <div className="flex space-x-3">
-                      <a
-                        href={member.social.linkedin}
-                        className="bg-white/20 p-2 rounded-full hover:bg-white/40 transition-colors"
-                      >
-                        <Linkedin className="h-5 w-5 text-white" />
-                      </a>
-                      <a
-                        href={member.social.twitter}
-                        className="bg-white/20 p-2 rounded-full hover:bg-white/40 transition-colors"
-                      >
-                        <Twitter className="h-5 w-5 text-white" />
-                      </a>
-                      <a
-                        href={member.social.github}
-                        className="bg-white/20 p-2 rounded-full hover:bg-white/40 transition-colors"
-                      >
-                        <Github className="h-5 w-5 text-white" />
-                      </a>
+              <Card className="h-full border border-border/50 hover:border-purple-200 dark:hover:border-purple-800 transition-all duration-300 group hover:shadow-lg">
+                <CardContent className="p-6">
+                  <div className="flex items-start space-x-4 mb-4">
+                    <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-3 rounded-full">
+                      <User className="h-6 w-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
+                      <p className="text-purple-600 dark:text-purple-400 font-medium">{member.role}</p>
                     </div>
                   </div>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
-                  <p className="text-purple-600 dark:text-purple-400 font-medium mb-3">{member.role}</p>
-                  <p className="text-foreground/70">{member.bio}</p>
+
+                  <p className="text-foreground/70 mb-6 leading-relaxed">{member.bio}</p>
+
+                  <div className="flex space-x-3 pt-4 border-t border-border/50">
+                    {member.social.linkedin && (
+                      <a
+                        href={member.social.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-full bg-muted hover:bg-purple-100 dark:hover:bg-purple-900/20 transition-colors group"
+                      >
+                        <Linkedin className="h-4 w-4 text-muted-foreground group-hover:text-purple-600" />
+                      </a>
+                    )}
+                    {member.social.instagram && (
+                      <a
+                        href={member.social.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-full bg-muted hover:bg-purple-100 dark:hover:bg-purple-900/20 transition-colors group"
+                      >
+                        <Instagram className="h-4 w-4 text-muted-foreground group-hover:text-purple-600" />
+                      </a>
+                    )}
+                    {member.social.github && (
+                      <a
+                        href={member.social.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-full bg-muted hover:bg-purple-100 dark:hover:bg-purple-900/20 transition-colors group"
+                      >
+                        <Github className="h-4 w-4 text-muted-foreground group-hover:text-purple-600" />
+                      </a>
+                    )}
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
