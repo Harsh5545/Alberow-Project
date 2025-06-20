@@ -108,8 +108,8 @@ export function ServiceHero({
         >
           {[
             { value: "98%", label: "Client Satisfaction" },
-            { value: "250+", label: "Projects Completed" },
-            { value: "15+", label: "Years Experience" },
+            { value: "100+", label: "Projects Completed" },
+            { value: "5+", label: "Years Experience" },
             { value: "24/7", label: "Support Available" },
           ].map((stat, index) => (
             <motion.div
