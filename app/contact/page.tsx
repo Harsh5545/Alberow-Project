@@ -5,6 +5,8 @@ import { ContactHero } from "@/components/contact/contact-hero"
 import { ContactForm } from "@/components/contact/contact-form"
 import { ContactInfo } from "@/components/contact/contact-info"
 import { ContactMap } from "@/components/contact/contact-map"
+// import { ContactMap } from "@/components/contact/contact-map"
+
 
 export const metadata: Metadata = {
   title: "Contact Us | Alberow",
