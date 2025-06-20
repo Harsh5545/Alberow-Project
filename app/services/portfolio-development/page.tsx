@@ -46,7 +46,7 @@ export default function PortfolioDevelopmentPage() {
       <PortfolioFeatures />
       <PortfolioProcess />
       <PortfolioShowcase />
-      <PortfolioPricing />
+      {/* <PortfolioPricing /> */}
       <PortfolioTestimonials />
       <PortfolioFaq />
       <PortfolioCta />

@@ -5,7 +5,7 @@ import MarketingChannels from "@/components/services/digital-marketing/marketing
 import MarketingProcess from "@/components/services/digital-marketing/marketing-process"
 import MarketingCaseStudies from "@/components/services/digital-marketing/marketing-case-studies"
 import MarketingFAQ from "@/components/services/digital-marketing/marketing-faq"
-import ContactSection from "@/components/contact-section"
+// import ContactSection from "@/components/contact-section"
 
 export const metadata: Metadata = {
   title: "Digital Marketing Services | Alberow",
@@ -27,7 +27,7 @@ export default function DigitalMarketingPage() {
       <MarketingProcess />
       <MarketingCaseStudies />
       <MarketingFAQ />
-      <ContactSection />
+      {/* <ContactSection /> */}
     </main>
   )
 }

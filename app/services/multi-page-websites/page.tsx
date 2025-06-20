@@ -46,7 +46,7 @@ export default function MultiPageWebsitesPage() {
       <MultiPageFeatures />
       <MultiPageProcess />
       <MultiPageShowcase />
-      <MultiPagePricing />
+      {/* <MultiPagePricing /> */}
       <MultiPageTestimonials />
       <MultiPageFaq />
       <MultiPageCta />

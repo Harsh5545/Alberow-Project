@@ -5,7 +5,7 @@ import DesignProcess from "@/components/services/ui-ux-design/design-process"
 import DesignShowcase from "@/components/services/ui-ux-design/design-showcase"
 import DesignTools from "@/components/services/ui-ux-design/design-tools"
 import DesignFAQ from "@/components/services/ui-ux-design/design-faq"
-import ContactSection from "@/components/contact-section"
+import { ContactSection } from "@/components/contact-section"
 
 export const metadata: Metadata = {
   title: "UI/UX Design Services | Alberow",

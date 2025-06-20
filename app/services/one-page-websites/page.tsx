@@ -46,7 +46,7 @@ export default function OnePageWebsitesPage() {
       <OnePageFeatures />
       <OnePageProcess />
       <OnePageShowcase />
-      <OnePagePricing />
+      {/* <OnePagePricing /> */}
       <OnePageTestimonials />
       <OnePageFaq />
       <OnePageCta />

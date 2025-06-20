@@ -46,7 +46,7 @@ export default function ApplicationDevelopmentPage() {
       <ApplicationDevFeatures />
       <ApplicationDevProcess />
       <ApplicationDevShowcase />
-      <ApplicationDevPricing />
+      {/* <ApplicationDevPricing /> */}
       <ApplicationDevTestimonials />
       <ApplicationDevFaq />
       <ApplicationDevCta />
