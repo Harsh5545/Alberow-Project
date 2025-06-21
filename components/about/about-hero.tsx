@@ -90,7 +90,7 @@ export function AboutHero() {
             />
             <div className="relative rounded-lg overflow-hidden shadow-xl">
               <Image
-                src="/placeholder.svg?height=600&width=800"
+                src="./assets/AboutAlberow.png"
                 alt="Alberow Team"
                 width={800}
                 height={600}
