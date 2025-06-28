@@ -603,7 +603,7 @@ export default function PendingItemsPage() {
                             Send Reminder
                           </Button>
                           <Button size="sm">
-                            <Phone className="mr-2 h-4 w-4" />
+                            <Phone  />
                             Contact Client
                           </Button>
                         </div>

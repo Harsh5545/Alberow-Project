@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import EditBlogPageClient from "./edit-blog-page-client"
+// import EditBlogPageClient from "./edit-blog-page-client"
 
 export const metadata: Metadata = {
   title: "Edit Blog Post",
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 }
 
 export default function EditBlogPage({ params }: { params: { id: string } }) {
-  return <EditBlogPageClient id={params.id} />
+  // return <EditBlogPageClient id={params.id} />
 }

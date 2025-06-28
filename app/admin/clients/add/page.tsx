@@ -196,7 +196,7 @@ export default function AddClientPage() {
                             className="absolute top-0 right-0 h-6 w-6 bg-background/80"
                             onClick={() => setLogo(null)}
                           >
-                            <X className="h-3 w-3" />
+                            <X  />
                           </Button>
                         </div>
                       ) : (
