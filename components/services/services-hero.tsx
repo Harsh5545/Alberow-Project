@@ -1,9 +1,10 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Lottie from "lottie-react"
 import { Code, Search, Smartphone, Layout, Layers, Users, BarChart, MessageSquare } from "lucide-react"
 import { useRef } from "react"
-
+import animationData from "@/public/animation/web.json";
 export function ServicesHero() {
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -19,9 +20,9 @@ export function ServicesHero() {
   ]
 
   return (
-    <section className="pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-gradient-to-b from-muted/50 to-background">
-      <div className="container mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto">
+    <section className="pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-gradient-to-b from-muted/50 flex to-background">
+      <div className="container mx-auto px-0">
+        <div className="text-center max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -114,6 +115,18 @@ export function ServicesHero() {
           />
         </motion.div>
       </div>
+      {/* <div>
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-pink-600/10 rounded-xl blur-3xl -z-20"
+          animate={{ opacity: [0, 1, 0] }}
+          transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+        />
+         <Lottie
+              animationData={animationData}
+              loop
+              className="w-full h-auto max-w-md mx-auto mb-6"
+            />
+      </div> */}
     </section>
   )
 }

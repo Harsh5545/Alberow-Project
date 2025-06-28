@@ -3,7 +3,8 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
-
+import Lottie from "lottie-react"
+import animationData from "@/public/animation/web.json";
 interface ServiceHeroProps {
   title: string
   description: string
@@ -71,13 +72,18 @@ export function ServiceHero({
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-10 mix-blend-overlay`} />
-              <Image
+              {/* <Image
                 src={image || "/assets/ai/website-designer-concept-illustration_114360-4449.avif"}
                 alt={title}
                 width={600}
                 height={400}
                 className="w-full h-auto object-cover rounded-2xl"
-              />
+              /> */}
+               <Lottie
+                            animationData={animationData}
+                            loop
+                            className="w-full h-auto max-w-md mx-auto mb-6"
+                          />
               <div className="absolute inset-0 border border-white/10 rounded-2xl pointer-events-none" />
             </div>
 
