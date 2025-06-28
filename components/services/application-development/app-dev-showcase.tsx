@@ -2,49 +2,87 @@
 
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Download, Users, Star, TrendingUp, Clock, CheckCircle, ArrowRight } from "lucide-react"
+import { Download, Users, Star, TrendingUp, Clock, CheckCircle, ArrowRight, ShoppingCart, Calendar } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { projects } from "@/lib/projects-data"
+
+const iconMap = {
+  users: Users,
+  star: Star,
+  "trending-up": TrendingUp,
+  calendar: Calendar,
+  "shopping-cart": ShoppingCart,
+  download: Download,
+  clock: Clock,
+  "check-circle": CheckCircle,
+}
 
 export function ApplicationDevShowcase() {
-  const caseStudies = [
-    {
-      title: "Fitness Tracking App",
-      description: "A mobile application for tracking fitness activities, nutrition, and progress over time.",
-      image: "/placeholder.svg?height=600&width=300",
-      stats: [
-        { icon: <Download className="h-4 w-4" />, value: "50,000+", label: "Downloads" },
-        { icon: <Star className="h-4 w-4" />, value: "4.7", label: "App Store Rating" },
-        { icon: <TrendingUp className="h-4 w-4" />, value: "30%", label: "Better Adherence" },
-      ],
-      platforms: ["iOS", "Android"],
-      color: "from-indigo-500 to-indigo-600",
-    },
-    {
-      title: "Food Delivery App",
-      description: "A mobile application for ordering food from local restaurants with real-time tracking.",
-      image: "/placeholder.svg?height=600&width=300",
-      stats: [
-        { icon: <Download className="h-4 w-4" />, value: "100,000+", label: "Downloads" },
-        { icon: <TrendingUp className="h-4 w-4" />, value: "35%", label: "Order Increase" },
-        { icon: <Clock className="h-4 w-4" />, value: "28%", label: "Faster Delivery" },
-      ],
-      platforms: ["iOS", "Android", "Web"],
-      color: "from-purple-500 to-purple-600",
-    },
-    {
-      title: "E-Learning Platform",
-      description: "A mobile application for accessing educational content and courses on the go.",
-      image: "/placeholder.svg?height=600&width=300",
-      stats: [
-        { icon: <Users className="h-4 w-4" />, value: "75,000+", label: "Active Users" },
-        { icon: <CheckCircle className="h-4 w-4" />, value: "45%", label: "Completion Rate" },
-        { icon: <TrendingUp className="h-4 w-4" />, value: "60%", label: "Engagement" },
-      ],
-      platforms: ["iOS", "Android", "Web"],
-      color: "from-indigo-500 to-indigo-600",
-    },
-  ]
+  // For now, we'll use projects that have stats (indicating they're more app-like)
+  // or create some example app projects based on existing data
+  const appProjects = projects.filter((project) => project.stats).slice(0, 3)
+
+  // If we don't have enough projects with stats, we'll create some examples
+  const caseStudies =
+    appProjects.length >= 3
+      ? appProjects.map((project, index) => ({
+          title: project.title,
+          description: project.description,
+          image: project.image,
+          stats: project.stats || [],
+          platforms: project.type === "one-page" ? ["Web"] : ["Web", "Mobile"],
+          color:
+            index === 0
+              ? "from-indigo-500 to-indigo-600"
+              : index === 1
+                ? "from-purple-500 to-purple-600"
+                : "from-green-500 to-green-600",
+          liveUrl: project.liveUrl,
+        }))
+      : [
+          // Fallback examples based on your actual projects
+          {
+            title: "Shreeji E-commerce App",
+            description: "A comprehensive e-commerce platform with modern interface and secure payment processing.",
+            image: "/placeholder.svg?height=600&width=300",
+            stats: [
+              { icon: "shopping-cart", value: "500+", label: "Products" },
+              { icon: "users", value: "200+", label: "Customers" },
+              { icon: "trending-up", value: "45%", label: "Sales Increase" },
+            ],
+            platforms: ["Web", "Mobile"],
+            color: "from-indigo-500 to-indigo-600",
+            liveUrl: "https://shreeji-appp.vercel.app",
+          },
+          {
+            title: "Nasik Bhel Bhandar App",
+            description: "A vibrant food ordering application with real-time order tracking and customer reviews.",
+            image: "/placeholder.svg?height=600&width=300",
+            stats: [
+              { icon: "shopping-cart", value: "60%", label: "Order Increase" },
+              { icon: "star", value: "4.9", label: "Customer Rating" },
+              { icon: "users", value: "1000+", label: "Happy Customers" },
+            ],
+            platforms: ["Web", "Mobile"],
+            color: "from-purple-500 to-purple-600",
+            liveUrl: "https://v0-bhel-bhaata-website.vercel.app",
+          },
+          {
+            title: "Diamond Beauty Booking App",
+            description:
+              "An elegant beauty service booking application with appointment management and service catalog.",
+            image: "/placeholder.svg?height=600&width=300",
+            stats: [
+              { icon: "calendar", value: "45%", label: "Booking Increase" },
+              { icon: "star", value: "4.7", label: "Service Rating" },
+              { icon: "users", value: "300+", label: "Regular Clients" },
+            ],
+            platforms: ["Web", "Mobile"],
+            color: "from-green-500 to-green-600",
+            liveUrl: "https://dimond.vercel.app",
+          },
+        ]
 
   return (
     <section className="py-20 bg-muted/30">
@@ -58,8 +96,8 @@ export function ApplicationDevShowcase() {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Our App Development Portfolio</h2>
           <p className="text-foreground/70 text-lg">
-            Explore some of our successful application development projects that have delivered exceptional results for
-            our clients.
+            Explore our successful application development projects that have delivered exceptional results for our
+            clients.
           </p>
         </motion.div>
 
@@ -93,23 +131,28 @@ export function ApplicationDevShowcase() {
                 <p className="text-foreground/70 mb-4">{study.description}</p>
 
                 <div className="grid grid-cols-3 gap-2 mb-6">
-                  {study.stats.map((stat, i) => (
-                    <div key={i} className="text-center">
-                      <div
-                        className={`bg-gradient-to-r ${study.color} text-white p-2 rounded-lg mb-2 flex items-center justify-center`}
-                      >
-                        {stat.icon}
+                  {study.stats.map((stat, i) => {
+                    const IconComponent = iconMap[stat.icon as keyof typeof iconMap]
+                    return (
+                      <div key={i} className="text-center">
+                        <div
+                          className={`bg-gradient-to-r ${study.color} text-white p-2 rounded-lg mb-2 flex items-center justify-center`}
+                        >
+                          {IconComponent && <IconComponent className="h-4 w-4" />}
+                        </div>
+                        <div className="font-semibold">{stat.value}</div>
+                        <div className="text-xs text-foreground/60">{stat.label}</div>
                       </div>
-                      <div className="font-semibold">{stat.value}</div>
-                      <div className="text-xs text-foreground/60">{stat.label}</div>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
 
-                <Button variant="outline" className="w-full" asChild>
-                  <Link href="/projects">
-                    View Case Study <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
+                <Button
+                  variant="outline"
+                  className="w-full bg-transparent"
+                  onClick={() => window.open(study.liveUrl, "_blank")}
+                >
+                  View Live Project <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
             </motion.div>

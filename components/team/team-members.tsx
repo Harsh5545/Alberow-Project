@@ -60,7 +60,18 @@ const teamMembers = [
       twitter: "#",
       github: "#",
     },
+    
   },
+   {
+    name: "Tejas Dongare",
+    role: "WordPress Developer & Sales",
+    bio: "Tejas specializes in WordPress development and sales, helping clients achieve their business goals with effective web solutions.",
+    image: "/placeholder.svg?height=400&width=400",
+    social: {
+      linkedin: "#",
+      twitter: "#",
+      github: "#",
+    },}
 ]
 
 export function TeamMembers() {

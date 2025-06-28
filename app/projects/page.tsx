@@ -7,8 +7,15 @@ import { ProjectsProcess } from "@/components/projects/projects-process"
 import { CtaSection } from "@/components/home/cta-section"
 
 export const metadata: Metadata = {
-  title: "Projects | Alberow",
-  description: "Explore our portfolio of successful web development and digital marketing projects.",
+  title: "Our Projects | Professional Web Development Portfolio",
+  description:
+    "Explore our portfolio of successful web development, design, and digital solutions. See how we've helped businesses grow with modern websites and applications.",
+  keywords: "web development portfolio, website design, business applications, digital solutions",
+  openGraph: {
+    title: "Our Projects | Professional Web Development Portfolio",
+    description: "Explore our portfolio of successful web development, design, and digital solutions.",
+    type: "website",
+  },
 }
 
 export default function ProjectsPage() {

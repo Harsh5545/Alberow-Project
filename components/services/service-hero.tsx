@@ -72,7 +72,7 @@ export function ServiceHero({
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-10 mix-blend-overlay`} />
               <Image
-                src={image || "/placeholder.svg"}
+                src={image || "/assets/ai/website-designer-concept-illustration_114360-4449.avif"}
                 alt={title}
                 width={600}
                 height={400}

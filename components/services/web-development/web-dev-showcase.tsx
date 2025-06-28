@@ -5,63 +5,35 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-
-const showcaseProjects = [
-  {
-    category: "E-commerce",
-    projects: [
-      {
-        title: "Fashion Boutique",
-        description: "A modern e-commerce platform with advanced filtering and seamless checkout experience.",
-        image: "/placeholder.svg?height=600&width=800",
-        features: ["Product catalog", "Advanced filtering", "Secure checkout", "Customer accounts"],
-      },
-      {
-        title: "Organic Food Store",
-        description: "An e-commerce website for organic food products with subscription options.",
-        image: "/placeholder.svg?height=600&width=800",
-        features: ["Subscription model", "Recipe integration", "Inventory management", "Delivery scheduling"],
-      },
-    ],
-  },
-  {
-    category: "Corporate",
-    projects: [
-      {
-        title: "Financial Services",
-        description: "A professional website for a financial services company with secure client portal.",
-        image: "/placeholder.svg?height=600&width=800",
-        features: ["Client dashboard", "Document sharing", "Appointment booking", "Financial calculators"],
-      },
-      {
-        title: "Law Firm",
-        description: "A sophisticated website for a law firm with case studies and attorney profiles.",
-        image: "/placeholder.svg?height=600&width=800",
-        features: ["Attorney profiles", "Practice areas", "Case studies", "Contact forms"],
-      },
-    ],
-  },
-  {
-    category: "SaaS",
-    projects: [
-      {
-        title: "Project Management Tool",
-        description: "A comprehensive project management application with real-time collaboration features.",
-        image: "/placeholder.svg?height=600&width=800",
-        features: ["Task management", "Team collaboration", "File sharing", "Progress tracking"],
-      },
-      {
-        title: "Marketing Analytics Platform",
-        description: "A data visualization platform for marketing analytics and campaign management.",
-        image: "/placeholder.svg?height=600&width=800",
-        features: ["Interactive dashboards", "Data visualization", "Campaign tracking", "Automated reporting"],
-      },
-    ],
-  },
-]
+import { ExternalLink } from "lucide-react"
+import { projects } from "@/lib/projects-data"
 
 export function WebDevShowcase() {
-  const [activeTab, setActiveTab] = useState("E-commerce")
+  const [activeTab, setActiveTab] = useState("Web Development")
+
+  // Organize projects by categories
+  const showcaseProjects = [
+    {
+      category: "Web Development",
+      projects: projects.filter((project) =>
+        Array.isArray(project.category)
+          ? project.category.includes("Web Development")
+          : project.category === "Web Development",
+      ),
+    },
+    {
+      category: "E-commerce",
+      projects: projects.filter((project) =>
+        Array.isArray(project.category) ? project.category.includes("E-commerce") : project.category === "E-commerce",
+      ),
+    },
+    {
+      category: "Portfolio",
+      projects: projects.filter((project) =>
+        Array.isArray(project.category) ? project.category.includes("Portfolio") : project.category === "Portfolio",
+      ),
+    },
+  ].filter((category) => category.projects.length > 0) // Only show categories with projects
 
   return (
     <section className="py-20">
@@ -91,7 +63,7 @@ export function WebDevShowcase() {
           </motion.p>
         </div>
 
-        <Tabs defaultValue="E-commerce" className="w-full" onValueChange={setActiveTab}>
+        <Tabs defaultValue="Web Development" className="w-full" onValueChange={setActiveTab}>
           <div className="flex justify-center mb-8">
             <TabsList>
               {showcaseProjects.map((category) => (
@@ -107,7 +79,7 @@ export function WebDevShowcase() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {category.projects.map((project, index) => (
                   <motion.div
-                    key={index}
+                    key={project.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
@@ -121,14 +93,32 @@ export function WebDevShowcase() {
                         fill
                         className="object-cover"
                       />
+                      <div className="absolute top-4 right-4 bg-purple-600 text-white text-xs px-2 py-1 rounded">
+                        {project.year}
+                      </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                      <div className="mb-3">
+                        <h3 className="text-xl font-semibold mb-1">{project.title}</h3>
+                        <p className="text-sm text-foreground/60">{project.client}</p>
+                      </div>
                       <p className="text-foreground/70 mb-4">{project.description}</p>
+
+                      <div className="mb-4">
+                        <h4 className="text-sm font-medium mb-2">Technologies Used:</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {project.technologies.slice(0, 4).map((tech, i) => (
+                            <span key={i} className="text-xs bg-muted px-2 py-1 rounded">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
                       <div className="mb-6">
                         <h4 className="text-sm font-medium mb-2">Key Features:</h4>
-                        <ul className="grid grid-cols-2 gap-2">
-                          {project.features.map((feature, i) => (
+                        <ul className="grid grid-cols-1 gap-1">
+                          {project.features.slice(0, 4).map((feature, i) => (
                             <li key={i} className="flex items-center text-sm text-foreground/70">
                               <span className="w-1.5 h-1.5 rounded-full bg-purple-600 mr-2"></span>
                               {feature}
@@ -136,8 +126,14 @@ export function WebDevShowcase() {
                           ))}
                         </ul>
                       </div>
-                      <Button variant="outline" className="w-full">
-                        View Case Study
+
+                      <Button
+                        variant="outline"
+                        className="w-full bg-transparent"
+                        onClick={() => window.open(project.liveUrl, "_blank")}
+                      >
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        View Live Project
                       </Button>
                     </div>
                   </motion.div>

@@ -3,9 +3,9 @@ import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'Alberow - Professional Web Development',
+  description: 'alberow is a professional web development company specializing in custom websites, applications, and digital solutions for businesses of all sizes.',
+  generator: 'alberow',
 }
 
 export default function RootLayout({

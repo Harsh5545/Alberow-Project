@@ -2,39 +2,16 @@
 
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Layers, Globe, ShoppingCart, ExternalLink } from "lucide-react"
+import { ArrowRight, ShoppingCart, Star, TrendingUp } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { projects } from "@/lib/projects-data"
+import { getEcommerceProjects } from "@/lib/projects-data"
 
-export function MultiPageShowcase() {
-  // Filter projects that are multi-page type
-  const multiPageProjects = projects.filter((project) => project.type === "multi-page")
-
-  const getIcon = (project: any) => {
-    if (Array.isArray(project.category)) {
-      if (project.category.includes("E-commerce")) return <ShoppingCart className="h-5 w-5" />
-      if (project.category.includes("Web Development")) return <Globe className="h-5 w-5" />
-    } else {
-      if (project.category === "E-commerce") return <ShoppingCart className="h-5 w-5" />
-      if (project.category === "Web Development") return <Globe className="h-5 w-5" />
-    }
-    return <Layers className="h-5 w-5" />
-  }
-
-  const getColor = (project: any) => {
-    if (Array.isArray(project.category)) {
-      if (project.category.includes("E-commerce")) return "from-green-500 to-green-600"
-      if (project.category.includes("Web Development")) return "from-blue-500 to-blue-600"
-    } else {
-      if (project.category === "E-commerce") return "from-green-500 to-green-600"
-      if (project.category === "Web Development") return "from-blue-500 to-blue-600"
-    }
-    return "from-purple-500 to-purple-600"
-  }
+export function EcommerceShowcase() {
+  const ecommerceProjects = getEcommerceProjects()
 
   return (
-    <section id="multi-page-showcase" className="py-20 bg-muted/30">
+    <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,14 +20,15 @@ export function MultiPageShowcase() {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Multi-Page Website Examples</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">E-commerce Solutions</h2>
           <p className="text-foreground/70 text-lg">
-            Explore our successful multi-page website projects that have delivered exceptional results for our clients.
+            Explore our successful e-commerce projects that have helped businesses grow their online sales and reach
+            more customers.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {multiPageProjects.map((project, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {ecommerceProjects.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 20 }}
@@ -65,19 +43,18 @@ export function MultiPageShowcase() {
                   <div className="p-6 text-white">
                     <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                     <div className="flex items-center gap-2">
-                      <div className={`bg-gradient-to-r ${getColor(project)} p-1 rounded-full`}>{getIcon(project)}</div>
-                      <span className="text-sm">Multi-Page Site</span>
+                      <div className="bg-gradient-to-r from-green-500 to-green-600 p-1 rounded-full">
+                        <ShoppingCart className="h-4 w-4" />
+                      </div>
+                      <span className="text-sm">
+                        {project.type === "one-page" ? "One-Page Store" : "Multi-Page Store"}
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div className="p-6">
-                <div className="mb-3">
-                  <p className="text-sm text-foreground/60">
-                    {project.client} • {project.year}
-                  </p>
-                </div>
                 <p className="text-foreground/70 mb-4">{project.description}</p>
 
                 <div className="mb-4">
@@ -86,7 +63,7 @@ export function MultiPageShowcase() {
                     {project.features.slice(0, 4).map((feature, i) => (
                       <span
                         key={i}
-                        className="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 px-2 py-1 rounded-full"
+                        className="text-xs bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-2 py-1 rounded-full"
                       >
                         {feature}
                       </span>
@@ -94,18 +71,33 @@ export function MultiPageShowcase() {
                   </div>
                 </div>
 
+                {project.stats && (
+                  <div className="grid grid-cols-3 gap-2 mb-4">
+                    {project.stats.map((stat, i) => {
+                      const IconComponent =
+                        stat.icon === "shopping-cart" ? ShoppingCart : stat.icon === "star" ? Star : TrendingUp
+                      return (
+                        <div key={i} className="text-center">
+                          <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-2 rounded-lg mb-2 flex items-center justify-center">
+                            <IconComponent className="h-4 w-4" />
+                          </div>
+                          <div className="font-semibold text-sm">{stat.value}</div>
+                          <div className="text-xs text-foreground/60">{stat.label}</div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
+
                 <div className="mb-6">
                   <h4 className="text-sm font-semibold text-foreground/60 mb-2">RESULTS:</h4>
                   <p className="text-sm text-foreground/80">{project.results}</p>
                 </div>
 
-                <Button
-                  variant="outline"
-                  className="w-full bg-transparent"
-                  onClick={() => window.open(project.liveUrl, "_blank")}
-                >
-                  <ExternalLink className="mr-2 h-4 w-4" />
-                  View Live Project
+                <Button variant="outline" className="w-full bg-transparent" asChild>
+                  <Link href={project.liveUrl} target="_blank">
+                    View Live Store <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </Button>
               </div>
             </motion.div>
@@ -122,7 +114,7 @@ export function MultiPageShowcase() {
           <Button
             asChild
             size="lg"
-            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+            className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white"
           >
             <Link href="/projects">
               View All Projects <ArrowRight className="ml-2 h-4 w-4" />

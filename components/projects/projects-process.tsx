@@ -129,7 +129,7 @@ export function ProjectsProcess() {
             />
             <div className="relative rounded-lg overflow-hidden shadow-xl">
               <Image
-                src="/placeholder.svg?height=600&width=800"
+                src="/assets/ai/dveloper.avif"
                 alt="Project Development Process"
                 width={800}
                 height={600}
