@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import EmailEditor from "@/components/admin/marketing/email-editor"
+// import EmailEditor from "@/components/admin/marketing/email-editor"
 
 export const metadata: Metadata = {
   title: "Email Editor - Alberow Admin",
@@ -21,7 +21,7 @@ export default function EmailEditorPage() {
           <CardDescription>Design your email, add recipients, and schedule sending</CardDescription>
         </CardHeader>
         <CardContent className="h-[calc(100%-80px)]">
-          <EmailEditor />
+          {/* <EmailEditor /> */}
         </CardContent>
       </Card>
     </div>
