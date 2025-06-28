@@ -1,8 +1,6 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
 import { Menu, X } from "lucide-react"
@@ -10,71 +8,82 @@ import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Services", href: "/services" },
-  { name: "Projects", href: "/projects" },
-  { name: "Blog", href: "/blog" },
-  
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Services", href: "#services" },
+  { name: "Projects", href: "#projects" },
+  { name: "Blog", href: "#blog" },
 ]
 
 export function Navbar() {
-  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const navRef = useRef(null)
+  const [activeSection, setActiveSection] = useState("home")
+  const navRef = useRef<HTMLDivElement>(null)
 
+  // Sticky and shadow on scroll
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
     }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
+  // Scroll spy for anchor sections
+  useEffect(() => {
+    const handleScroll = () => {
+      let current = "home"
+      for (const link of navLinks) {
+        const section = document.getElementById(link.href.replace("#", ""))
+        if (section && window.scrollY + 80 >= section.offsetTop) {
+          current = link.href.replace("#", "")
+        }
+      }
+      setActiveSection(current)
+    }
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   // Close mobile menu when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (navRef.current && !navRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
         setIsOpen(false)
       }
     }
-
     document.addEventListener("mousedown", handleClickOutside)
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
+    return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
-
-  // Close mobile menu when route changes
-  useEffect(() => {
-    setIsOpen(false)
-  }, [pathname])
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "unset"
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "unset"
     return () => {
       document.body.style.overflow = "unset"
     }
   }, [isOpen])
 
+  // Smooth scroll CSS
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = "smooth"
+    return () => {
+      document.documentElement.style.scrollBehavior = ""
+    }
+  }, [])
+
   return (
     <header
       ref={navRef}
       className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300",
-        scrolled ? "bg-background/80 backdrop-blur-md shadow-md py-2" : "bg-transparent py-4",
+        "sticky top-0 w-full z-50 transition-all duration-300",
+        scrolled ? "bg-background/80 backdrop-blur-md shadow-md py-2" : "bg-transparent py-4"
       )}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2 z-10">
+          <a href="#home" className="flex items-center space-x-2 z-10">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -83,27 +92,27 @@ export function Navbar() {
             >
               Alberow
             </motion.div>
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden md:flex items-center space-x-6" aria-label="Main navigation">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.name}
                 href={link.href}
                 className={cn(
                   "text-foreground/80 hover:text-foreground transition-colors relative group py-2",
-                  pathname === link.href && "text-foreground font-medium",
+                  activeSection === link.href.replace("#", "") && "text-foreground font-medium"
                 )}
               >
                 {link.name}
                 <span
                   className={cn(
                     "absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-300 group-hover:w-full",
-                    pathname === link.href ? "w-full" : "w-0",
+                    activeSection === link.href.replace("#", "") ? "w-full" : "w-0"
                   )}
                 />
-              </Link>
+              </a>
             ))}
           </nav>
 
@@ -115,7 +124,7 @@ export function Navbar() {
               asChild
               className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
             >
-              <Link href="/contact">Get Started</Link>
+              <a href="#contact">Get Started</a>
             </Button>
           </div>
 
@@ -178,21 +187,21 @@ export function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <Link
+                    <a
                       href={link.href}
                       className={cn(
                         "text-foreground/80 hover:text-foreground py-2 transition-colors text-2xl font-medium flex items-center",
-                        pathname === link.href && "text-foreground font-bold",
+                        activeSection === link.href.replace("#", "") && "text-foreground font-bold"
                       )}
                       onClick={() => setIsOpen(false)}
                     >
                       <motion.span
                         initial={{ width: 0 }}
-                        animate={{ width: pathname === link.href ? 24 : 0 }}
+                        animate={{ width: activeSection === link.href.replace("#", "") ? 24 : 0 }}
                         className="h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 mr-2"
                       />
                       {link.name}
-                    </Link>
+                    </a>
                   </motion.div>
                 ))}
               </div>
@@ -207,7 +216,7 @@ export function Navbar() {
                   className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white w-full py-6 text-lg"
                   onClick={() => setIsOpen(false)}
                 >
-                  <Link href="/contact">Get Started</Link>
+                  <a href="#contact">Get Started</a>
                 </Button>
               </motion.div>
             </div>

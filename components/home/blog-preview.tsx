@@ -6,37 +6,12 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { ArrowRight, Calendar, User } from "lucide-react"
-
-const blogPosts = [
-  {
-    title: "10 SEO Strategies to Boost Your Website Ranking",
-    excerpt:
-      "Learn the most effective SEO strategies that will help improve your website's visibility and ranking on search engines.",
-    date: "May 15, 2023",
-    author: "Alex Johnson",
-    image: "/placeholder.svg?height=300&width=500",
-    slug: "seo-strategies-boost-ranking",
-  },
-  {
-    title: "The Future of Web Development in 2023",
-    excerpt: "Discover the emerging trends and technologies that are shaping the future of web development this year.",
-    date: "April 28, 2023",
-    author: "Sarah Williams",
-    image: "/placeholder.svg?height=300&width=500",
-    slug: "future-web-development-2023",
-  },
-  {
-    title: "How to Create an Effective Social Media Strategy",
-    excerpt:
-      "A comprehensive guide to developing and implementing a social media strategy that drives engagement and conversions.",
-    date: "April 10, 2023",
-    author: "Michael Brown",
-    image: "/placeholder.svg?height=300&width=500",
-    slug: "effective-social-media-strategy",
-  },
-]
+import { blogPosts } from "@/lib/blog-data"
 
 export function BlogPreview() {
+  // Show only the latest 3 posts
+  const latestPosts = blogPosts.slice(0, 3)
+
   return (
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -69,9 +44,9 @@ export function BlogPreview() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
         >
-          {blogPosts.map((post, index) => (
+          {latestPosts.map((post, index) => (
             <motion.div
-              key={index}
+              key={post.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

@@ -1,95 +1,97 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { ArrowRight, Code, Sparkles, Globe, MousePointer } from "lucide-react"
-import { useEffect, useRef, useState } from "react"
-import Image from "next/image"
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, Code, Sparkles, Globe, MousePointer } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Lottie from "lottie-react";
+import animationData from "@/public/animation/webDesign.json";
 
 export function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
-  })
+  });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"])
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   // For the 3D tilt effect
-  const [rotateX, setRotateX] = useState(0)
-  const [rotateY, setRotateY] = useState(0)
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return
-    const rect = containerRef.current.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    const centerX = rect.width / 2
-    const centerY = rect.height / 2
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
 
-    setRotateX((y - centerY) / 20)
-    setRotateY((centerX - x) / 20)
-  }
+    setRotateX((y - centerY) / 20);
+    setRotateY((centerX - x) / 20);
+  };
 
   const handleMouseLeave = () => {
-    setRotateX(0)
-    setRotateY(0)
-  }
+    setRotateX(0);
+    setRotateY(0);
+  };
 
   // For the typing effect - improved to prevent layout shifts
-  const [displayText, setDisplayText] = useState("")
-  const [currentPhrase, setCurrentPhrase] = useState("")
+  const [displayText, setDisplayText] = useState("");
+  const [currentPhrase, setCurrentPhrase] = useState("");
   const phrases = [
     "Stunning Websites",
     "Digital Experiences",
     "Mobile Applications",
     "Brand Identities",
     "Growth Strategies",
-  ]
-  const [phraseIndex, setPhraseIndex] = useState(0)
-  const [charIndex, setCharIndex] = useState(0)
-  const [isDeleting, setIsDeleting] = useState(false)
-  const [typingSpeed, setTypingSpeed] = useState(100)
+  ];
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(100);
 
   // Pre-calculate the maximum width to prevent layout shifts
-  const maxPhraseLength = Math.max(...phrases.map((phrase) => phrase.length))
+  const maxPhraseLength = Math.max(...phrases.map((phrase) => phrase.length));
 
   useEffect(() => {
     const type = () => {
-      const currentPhrase = phrases[phraseIndex]
-      setCurrentPhrase(currentPhrase)
+      const currentPhrase = phrases[phraseIndex];
+      setCurrentPhrase(currentPhrase);
 
       if (isDeleting) {
-        setDisplayText(currentPhrase.substring(0, charIndex - 1))
-        setCharIndex((prev) => prev - 1)
-        setTypingSpeed(50) // Faster when deleting
+        setDisplayText(currentPhrase.substring(0, charIndex - 1));
+        setCharIndex((prev) => prev - 1);
+        setTypingSpeed(50); // Faster when deleting
       } else {
-        setDisplayText(currentPhrase.substring(0, charIndex + 1))
-        setCharIndex((prev) => prev + 1)
-        setTypingSpeed(100) // Normal speed when typing
+        setDisplayText(currentPhrase.substring(0, charIndex + 1));
+        setCharIndex((prev) => prev + 1);
+        setTypingSpeed(100); // Normal speed when typing
       }
 
       // If completed typing the phrase
       if (!isDeleting && charIndex === currentPhrase.length) {
-        setIsDeleting(true)
-        setTypingSpeed(1000) // Pause before deleting
+        setIsDeleting(true);
+        setTypingSpeed(1000); // Pause before deleting
       }
 
       // If completed deleting the phrase
       if (isDeleting && charIndex === 0) {
-        setIsDeleting(false)
-        setPhraseIndex((prev) => (prev + 1) % phrases.length)
-        setTypingSpeed(500) // Pause before typing next phrase
+        setIsDeleting(false);
+        setPhraseIndex((prev) => (prev + 1) % phrases.length);
+        setTypingSpeed(500); // Pause before typing next phrase
       }
-    }
+    };
 
-    const timer = setTimeout(type, typingSpeed)
-    return () => clearTimeout(timer)
-  }, [charIndex, isDeleting, phraseIndex, phrases, typingSpeed])
+    const timer = setTimeout(type, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [charIndex, isDeleting, phraseIndex, phrases, typingSpeed]);
 
   return (
     <section
@@ -149,7 +151,9 @@ export function HeroSection() {
                 height: Math.random() * 10 + 5,
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
-                background: `rgba(${Math.random() * 255}, ${Math.random() * 100 + 100}, ${Math.random() * 255}, 0.3)`,
+                background: `rgba(${Math.random() * 255}, ${
+                  Math.random() * 100 + 100
+                }, ${Math.random() * 255}, 0.3)`,
               }}
               animate={{
                 y: [0, -100],
@@ -206,8 +210,9 @@ export function HeroSection() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="text-lg md:text-xl text-foreground/80 mb-8 max-w-2xl mx-auto lg:mx-0"
             >
-              Alberow is a full-stack development agency specializing in creating powerful digital experiences that
-              drive growth and engagement for your business.
+              Alberow is a full-stack development agency specializing in
+              creating powerful digital experiences that drive growth and
+              engagement for your business.
             </motion.p>
 
             <motion.div
@@ -219,7 +224,7 @@ export function HeroSection() {
               <Button
                 asChild
                 size="lg"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white group relative overflow-hidden"
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white group relative overflow-hidden transition-transform duration-200 hover:scale-105"
               >
                 <Link href="/contact">
                   <span className="relative z-10">Get Started</span>
@@ -240,7 +245,11 @@ export function HeroSection() {
                   Explore Services
                   <motion.span
                     animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, repeatDelay: 2 }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Number.POSITIVE_INFINITY,
+                      repeatDelay: 2,
+                    }}
                   >
                     <MousePointer size={16} className="ml-2" />
                   </motion.span>
@@ -259,6 +268,8 @@ export function HeroSection() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
+            {" "}
+           
             <motion.div
               style={{
                 rotateX: rotateX,
@@ -272,16 +283,14 @@ export function HeroSection() {
               <div className="relative w-full h-[500px]">
                 {/* Desktop */}
                 <motion.div
-                  className="absolute top-0 left-0 right-0 mx-auto w-[80%] h-auto rounded-lg overflow-hidden shadow-2xl"
+                  className="absolute top-0 left-0 right-0 mx-auto w-[90%] h-auto rounded-lg overflow-hidden shadow-2xl"
                   style={{ z: 30, translateZ: "40px" }}
                 >
-                  <Image
-                    src="/placeholder.svg?height=400&width=600"
-                    alt="Desktop Website"
-                    width={600}
-                    height={400}
-                    className="w-full h-auto object-cover rounded-lg border border-gray-200 dark:border-gray-800"
-                  />
+                  <Lottie
+              animationData={animationData}
+              loop
+              className="w-full h-auto max-w-fit mx-auto mb-5"
+            />
                 </motion.div>
 
                 {/* Tablet */}
@@ -289,13 +298,13 @@ export function HeroSection() {
                   className="absolute bottom-10 right-0 w-[40%] h-auto rounded-lg overflow-hidden shadow-xl"
                   style={{ z: 20, translateZ: "20px" }}
                 >
-                  <Image
+                  {/* <Image
                     src="/placeholder.svg?height=300&width=400"
                     alt="Tablet Website"
                     width={400}
                     height={300}
                     className="w-full h-auto object-cover rounded-lg border border-gray-200 dark:border-gray-800"
-                  />
+                  /> */}
                 </motion.div>
 
                 {/* Mobile */}
@@ -303,13 +312,13 @@ export function HeroSection() {
                   className="absolute bottom-20 left-0 w-[25%] h-auto rounded-lg overflow-hidden shadow-lg"
                   style={{ z: 10, translateZ: "10px" }}
                 >
-                  <Image
+                  {/* <Image
                     src="/placeholder.svg?height=500&width=250"
                     alt="Mobile Website"
                     width={250}
                     height={500}
                     className="w-full h-auto object-cover rounded-lg border border-gray-200 dark:border-gray-800"
-                  />
+                  /> */}
                 </motion.div>
 
                 {/* Decorative elements */}
@@ -320,7 +329,11 @@ export function HeroSection() {
                     y: [0, -15, 0],
                     rotate: [0, 10, 0],
                   }}
-                  transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                  transition={{
+                    duration: 5,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                  }}
                 />
 
                 <motion.div
@@ -330,7 +343,12 @@ export function HeroSection() {
                     y: [0, 15, 0],
                     rotate: [0, -10, 0],
                   }}
-                  transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 1 }}
+                  transition={{
+                    duration: 4,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                    delay: 1,
+                  }}
                 />
 
                 <motion.div
@@ -339,7 +357,12 @@ export function HeroSection() {
                   animate={{
                     rotate: [0, 45, 0, -45, 0],
                   }}
-                  transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 2 }}
+                  transition={{
+                    duration: 6,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                    delay: 2,
+                  }}
                 />
               </div>
             </motion.div>
@@ -458,5 +481,5 @@ export function HeroSection() {
         </motion.div>
       </motion.div>
     </section>
-  )
+  );
 }
