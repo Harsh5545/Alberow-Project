@@ -12,19 +12,19 @@ export function ContactInfo() {
     {
       icon: <Phone className="h-6 w-6 text-pink-600 dark:text-pink-400" />,
       title: "Phone",
-      details: "+1 (555) 123-4567",
-      action: "tel:+15551234567",
+      details: "+91 9137747708",
+      // action: "tel:+15551234567",
     },
     {
       icon: <MapPin className="h-6 w-6 text-purple-600 dark:text-purple-400" />,
       title: "Address",
-      details: "123 Tech Street, Digital City, 10001",
+      details: "Om darsh Heights, kalyan-421306",
       action: "https://maps.google.com",
     },
     {
       icon: <Clock className="h-6 w-6 text-pink-600 dark:text-pink-400" />,
       title: "Business Hours",
-      details: "Monday - Friday: 9AM - 6PM",
+      details: "Monday - Friday: 9AM - 8PM",
       action: "",
     },
   ]
