@@ -7,7 +7,7 @@ import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Code, Sparkles, Globe, MousePointer } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import Lottie from "lottie-react";
 import animationData from "@/public/animation/webDesign.json";
 

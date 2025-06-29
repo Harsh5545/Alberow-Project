@@ -87,7 +87,7 @@ export function SeoAnalytics() {
             className="relative h-[400px] rounded-lg overflow-hidden shadow-lg border border-border/50"
           >
             <Image
-              src="/placeholder.svg?height=800&width=1000"
+              src="/assets/ai/websitedevelopment.jpg"
               alt="SEO Analytics Dashboard"
               fill
               className="object-cover"

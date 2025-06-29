@@ -1,22 +1,35 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Image from "next/image"
+import {
+  SiReact,
+  SiNextdotjs,
+  SiVuedotjs,
+  SiAngular,
+  SiNodedotjs,
+  SiExpress,
+  SiDjango,
+  SiLaravel,
+  SiMongodb,
+  SiPostgresql,
+  SiMysql,
+  SiFirebase,
+} from "react-icons/si"
 
 export function WebDevTechnologies() {
   const technologies = [
-    { name: "React", image: "/placeholder.svg?height=80&width=80", category: "Frontend" },
-    { name: "Next.js", image: "/placeholder.svg?height=80&width=80", category: "Frontend" },
-    { name: "Vue.js", image: "/placeholder.svg?height=80&width=80", category: "Frontend" },
-    { name: "Angular", image: "/placeholder.svg?height=80&width=80", category: "Frontend" },
-    { name: "Node.js", image: "/placeholder.svg?height=80&width=80", category: "Backend" },
-    { name: "Express", image: "/placeholder.svg?height=80&width=80", category: "Backend" },
-    { name: "Django", image: "/placeholder.svg?height=80&width=80", category: "Backend" },
-    { name: "Laravel", image: "/placeholder.svg?height=80&width=80", category: "Backend" },
-    { name: "MongoDB", image: "/placeholder.svg?height=80&width=80", category: "Database" },
-    { name: "PostgreSQL", image: "/placeholder.svg?height=80&width=80", category: "Database" },
-    { name: "MySQL", image: "/placeholder.svg?height=80&width=80", category: "Database" },
-    { name: "Firebase", image: "/placeholder.svg?height=80&width=80", category: "Database" },
+    { name: "React", icon: <SiReact size={48} className="text-sky-500" />, category: "Frontend" },
+    { name: "Next.js", icon: <SiNextdotjs size={48} className="text-black dark:text-white" />, category: "Frontend" },
+    { name: "Vue.js", icon: <SiVuedotjs size={48} className="text-green-500" />, category: "Frontend" },
+    { name: "Angular", icon: <SiAngular size={48} className="text-red-600" />, category: "Frontend" },
+    { name: "Node.js", icon: <SiNodedotjs size={48} className="text-green-700" />, category: "Backend" },
+    { name: "Express", icon: <SiExpress size={48} className="text-gray-700 dark:text-gray-200" />, category: "Backend" },
+    { name: "Django", icon: <SiDjango size={48} className="text-green-900" />, category: "Backend" },
+    { name: "Laravel", icon: <SiLaravel size={48} className="text-red-500" />, category: "Backend" },
+    { name: "MongoDB", icon: <SiMongodb size={48} className="text-green-600" />, category: "Database" },
+    { name: "PostgreSQL", icon: <SiPostgresql size={48} className="text-blue-700" />, category: "Database" },
+    { name: "MySQL", icon: <SiMysql size={48} className="text-blue-500" />, category: "Database" },
+    { name: "Firebase", icon: <SiFirebase size={48} className="text-yellow-500" />, category: "Database" },
   ]
 
   return (
@@ -47,8 +60,8 @@ export function WebDevTechnologies() {
               className="bg-background rounded-xl p-4 flex flex-col items-center justify-center border border-foreground/10 hover:border-foreground/20 hover:shadow-lg transition-all"
               whileHover={{ y: -5 }}
             >
-              <div className="w-12 h-12 mb-3 relative">
-                <Image src={tech.image || "/placeholder.svg"} alt={tech.name} fill className="object-contain" />
+              <div className="w-12 h-12 mb-3 flex items-center justify-center">
+                {tech.icon}
               </div>
               <h3 className="text-sm font-medium">{tech.name}</h3>
               <span className="text-xs text-foreground/60 mt-1">{tech.category}</span>
