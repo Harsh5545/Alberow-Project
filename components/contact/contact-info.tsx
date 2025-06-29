@@ -1,5 +1,5 @@
-"use client"
-import { Mail, Phone, MapPin, Clock } from "lucide-react"
+"use client";
+import { Mail, Phone, MapPin, Clock } from "lucide-react";
 
 export function ContactInfo() {
   const contactInfo = [
@@ -27,31 +27,37 @@ export function ContactInfo() {
       details: "Monday - Friday: 9AM - 8PM",
       action: "",
     },
-  ]
-
+  ];
+ 
   return (
     <section className="py-12 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {contactInfo.map((item, index) => (
-            <a
-              key={index}
-              href={item.action}
-              className={`block p-6 rounded-lg border border-border/50 bg-background hover:shadow-md transition-shadow ${
-                !item.action && "pointer-events-none"
-              }`}
-              target={item.action.startsWith("http") ? "_blank" : undefined}
-              rel={item.action.startsWith("http") ? "noopener noreferrer" : undefined}
-            >
-              <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-4">{item.icon}</div>
-                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-foreground/70">{item.details}</p>
-              </div>
-            </a>
-          ))}
+          {contactInfo.map((item, index) => {
+            const isExternal =
+              typeof item.action === "string" && item.action.startsWith("http");
+            return (
+              <a
+                key={index}
+                href={item.action}
+                className={`block p-6 rounded-lg border border-border/50 bg-background hover:shadow-md transition-shadow ${
+                  !item.action && "pointer-events-none"
+                }`}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+              >
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-4">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                  <p className="text-foreground/70">{item.details}</p>
+                </div>
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>
-  )
+  );
 }

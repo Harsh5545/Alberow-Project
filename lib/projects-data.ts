@@ -188,14 +188,54 @@ export const projects: Project[] = [
       { icon: "users", value: "1000+", label: "Happy Customers" },
     ],
     socialLinks: {
-      instagram: "https://instagram.com/nasikbhelbhandar",
-      facebook: "https://facebook.com/nasikbhelbhandar",
+      instagram: "https://instagram.com/",
+      facebook: "https://facebook.com/",
+    },
+  },
+    {
+    id: "firesafe",
+    title: "FireSafe",
+    category: "Web Development",
+    image: "/assets/ai/fire.png",
+    description:
+      "A modern, informative website for FireSafe, a fire safety and protection company, showcasing their services, certifications, and client portfolio.",
+    client: "FireSafe",
+    year: "2024",
+    technologies: ["Next.js", "React", "Tailwind CSS", "TypeScript"],
+    challenge:
+      "Build a professional online presence to highlight fire safety solutions, certifications, and trusted client partnerships.",
+    solution:
+      "Developed a responsive, visually engaging website with service overviews, certification displays, and a portfolio of completed projects.",
+    results: "Enhanced credibility, improved lead generation, and established FireSafe as a trusted fire protection partner.",
+    images: [
+      "/assets/ai/fire1.png",
+      "/assets/ai/fire2.png",
+      "/assets/ai/fire3.png",
+    ],
+    liveUrl: "https://fireextensionsafty.vercel.app/",
+    type: "multi-page",
+    features: [
+      "Service Overview",
+      "Certifications Display",
+      "Client Portfolio",
+      "Contact Forms",
+      "Responsive Design",
+      "SEO Optimized"
+    ],
+    stats: [
+      { icon: "shield", value: "100+", label: "Sites Protected" },
+      { icon: "award", value: "10+", label: "Certifications" },
+      { icon: "users", value: "50+", label: "Corporate Clients" },
+    ],
+    socialLinks: {
+      instagram: "https://instagram.com/",
+      facebook: "https://facebook.com/",
     },
   },
   {
     id: "diamond-beauty-parlour",
     title: "Diamond Beauty Parlour",
-    category: "one-page",
+    category: "One-page",
     image: "/assets/diamond.png",
     description:
       "An elegant beauty parlour website showcasing services, treatments, and booking system with luxurious design.",
