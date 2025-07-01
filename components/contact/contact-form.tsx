@@ -107,23 +107,7 @@ export function ContactForm() {
                 <Textarea id="message" placeholder="Tell us about your project and requirements..." rows={5} required />
               </div>
 
-              <div className="space-y-2 mb-6">
-                <label htmlFor="budget" className="text-sm font-medium">
-                  Budget Range
-                </label>
-                <Select>
-                  <SelectTrigger id="budget">
-                    <SelectValue placeholder="Select your budget range" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="less-5k">Less than $5,000</SelectItem>
-                    <SelectItem value="5k-10k">$5,000 - $10,000</SelectItem>
-                    <SelectItem value="10k-20k">$10,000 - $20,000</SelectItem>
-                    <SelectItem value="20k-plus">$20,000+</SelectItem>
-                    <SelectItem value="not-sure">Not sure yet</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+            
 
               <Button
                 type="submit"

@@ -125,32 +125,67 @@ export function ServicesList() {
   const [activeService, setActiveService] = useState(0)
 
   return (
-    <section className="py-20">
+     <section className="py-20">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-2">
               {services.map((service, index) => (
-                <Button
-                  key={index}
-                  variant={activeService === index ? "default" : "outline"}
-                  className={`w-full justify-start text-left h-auto py-3 px-4 ${
-                    activeService === index ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white" : ""
-                  }`}
-                  onClick={() => setActiveService(index)}
-                >
-                  <div className="flex items-center">
-                    <div className="mr-3">{service.icon}</div>
-                    <div>
-                      <h3 className="font-medium">{service.title}</h3>
+                <div key={index}>
+                  <Button
+                    variant={activeService === index ? "default" : "outline"}
+                    className={`w-full justify-start text-left h-auto py-3 px-4 ${
+                      activeService === index ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white" : ""
+                    }`}
+                    onClick={() => setActiveService(index)}
+                  >
+                    <div className="flex items-center">
+                      <div className="mr-3">{service.icon}</div>
+                      <div>
+                        <h3 className="font-medium">{service.title}</h3>
+                      </div>
                     </div>
+                  </Button>
+                  {/* Mobile: Show details below the selected button */}
+                  <div className="block lg:hidden">
+                    {activeService === index && (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="bg-background p-6 rounded-lg border border-border/50 mt-2 mb-4"
+                      >
+                        <div className="flex items-center mb-4">
+                          <div className="mr-4">{service.icon}</div>
+                          <h2 className="text-xl font-bold">{service.title}</h2>
+                        </div>
+                        <p className="text-foreground/70 text-base mb-4">{service.description}</p>
+                        <h3 className="text-lg font-semibold mb-2">Key Features</h3>
+                        <ul className="grid grid-cols-1 gap-2 mb-4">
+                          {service.features.map((feature, fidx) => (
+                            <li key={fidx} className="flex items-center">
+                              <div className="h-2 w-2 bg-purple-600 dark:bg-purple-400 rounded-full mr-2" />
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <Button
+                          asChild
+                          className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                        >
+                          <Link href={service.href}>Learn More About {service.title}</Link>
+                        </Button>
+                      </motion.div>
+                    )}
                   </div>
-                </Button>
+                </div>
               ))}
             </div>
           </div>
 
-          <div className="lg:col-span-2">
+          {/* Desktop: Show details on the right */}
+          <div className="hidden lg:block lg:col-span-2">
             <motion.div
               key={activeService}
               initial={{ opacity: 0, y: 20 }}
@@ -162,9 +197,7 @@ export function ServicesList() {
                 <div className="mr-4">{services[activeService].icon}</div>
                 <h2 className="text-2xl font-bold">{services[activeService].title}</h2>
               </div>
-
               <p className="text-foreground/70 text-lg mb-8">{services[activeService].description}</p>
-
               <h3 className="text-xl font-semibold mb-4">Key Features</h3>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
                 {services[activeService].features.map((feature, index) => (
@@ -180,7 +213,6 @@ export function ServicesList() {
                   </motion.li>
                 ))}
               </ul>
-
               <div className="mt-6">
                 <Button
                   asChild

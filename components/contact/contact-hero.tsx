@@ -14,14 +14,14 @@ export function ContactHero() {
             transition={{ duration: 0.5 }}
             className="text-center md:text-left max-w-2xl mb-10 md:mb-0"
           >
-           <motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.5, delay: 0.2 }}
-  className="inline-flex items-center px-3 py-1 rounded-full border border-purple-200 dark:border-purple-800 bg-purple-100/50 dark:bg-purple-900/20 text-purple-800 dark:text-purple-300 text-sm mb-6"
->
-  Get in Touch
-</motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="inline-flex items-center px-3 py-1 rounded-full border border-purple-200 dark:border-purple-800 bg-purple-100/50 dark:bg-purple-900/20 text-purple-800 dark:text-purple-300 text-sm mb-6"
+            >
+              Get in Touch
+            </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -65,16 +65,22 @@ export function ContactHero() {
                   icon: <Mail className="h-8 w-8 text-purple-600 dark:text-purple-400" />,
                   label: "Email Us",
                   delay: 0.7,
+                  href: "mailto:info@alberow.com",
+                  target: "_blank",
                 },
                 {
                   icon: <Phone className="h-8 w-8 text-pink-600 dark:text-pink-400" />,
                   label: "Call Us",
                   delay: 0.8,
+                  href: "tel:+919137747708",
+                  target: "_self",
                 },
                 {
                   icon: <MessageSquare className="h-8 w-8 text-purple-600 dark:text-purple-400" />,
                   label: "Chat With Us",
                   delay: 0.9,
+                  href: "https://wa.me/919137747708",
+                  target: "_blank",
                 },
                 {
                   icon: (
@@ -96,24 +102,33 @@ export function ContactHero() {
                   ),
                   label: "Visit Us",
                   delay: 1.0,
+                  href: "https://maps.google.com/?q=Om+darsh+Heights,+kalyan-421306",
+                  target: "_blank",
                 },
               ].map((item, index) => (
-                <motion.div
+                <a
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: item.delay }}
-                  className="bg-background p-6 rounded-lg border border-border/50 flex flex-col items-center text-center hover:border-purple-200 dark:hover:border-purple-800 transition-all duration-300"
+                  href={item.href}
+                  target={item.target}
+                  rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
+                  className="focus:outline-none"
                 >
                   <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                    className="mb-3"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: item.delay }}
+                    className="bg-background p-6 rounded-lg border border-border/50 flex flex-col items-center text-center hover:border-purple-200 dark:hover:border-purple-800 transition-all duration-300"
                   >
-                    {item.icon}
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                      className="mb-3"
+                    >
+                      {item.icon}
+                    </motion.div>
+                    <p className="font-medium">{item.label}</p>
                   </motion.div>
-                  <p className="font-medium">{item.label}</p>
-                </motion.div>
+                </a>
               ))}
             </div>
           </motion.div>

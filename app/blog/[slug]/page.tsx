@@ -154,10 +154,10 @@ export default function BlogPost({ params }: BlogPostPageProps) {
         {/* Hero Section */}
         <div className="relative bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600 text-white">
           <div className="absolute inset-0 bg-black/20"></div>
-          <div className="relative container mx-auto px-4 pt-32 pb-16">
+          <div className="relative container mx-auto px-4 pt-16 pb-16">
             <Button asChild variant="ghost" className="mb-8 text-white/80 hover:text-white hover:bg-white/10">
-              <Link href="/blog" className="flex items-center">
-                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Blog
+              <Link href="/blog" className="md:flex hidden md:items-center">
+                <ArrowLeft className= "mr-2 h-4 w-4" /> Back to Blog
               </Link>
             </Button>
 
@@ -191,15 +191,15 @@ export default function BlogPost({ params }: BlogPostPageProps) {
                 </div>
                 <Separator orientation="vertical" className="h-8 bg-white/30" />
                 <div className="flex items-center">
-                  <Calendar className="h-5 w-5 mr-2" />
+                  <Calendar className="h-5 w-5 mr-1 md:mr-2" />
                   <span>{post.date}</span>
                 </div>
                 <div className="flex items-center">
-                  <Clock className="h-5 w-5 mr-2" />
+                  <Clock className="h-5 w-5 mr-1 md:mr-2" />
                   <span>{post.readTime}</span>
                 </div>
                 <div className="flex items-center">
-                  <Eye className="h-5 w-5 mr-2" />
+                  <Eye className="h-5 w-5 mr-1 md:mr-2" />
                   <span>2.4k views</span>
                 </div>
               </div>
@@ -233,17 +233,17 @@ export default function BlogPost({ params }: BlogPostPageProps) {
                         size="sm"
                         className="text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950"
                       >
-                        <Heart className="h-4 w-4 mr-2" />
+                        <Heart className="md:h-4 md:w-4 h-2 w-2 mr-1 md:mr-2" />
                         124 Likes
                       </Button>
                       <Button variant="ghost" size="sm">
-                        <Bookmark className="h-4 w-4 mr-2" />
+                        <Bookmark className="md:h-4 md:w-4 h-2 w-2 mr-1 md:mr-2" />
                         Save
                       </Button>
-                      <Button variant="ghost" size="sm">
-                        <MessageCircle className="h-4 w-4 mr-2" />
+                      {/* <Button variant="ghost" size="sm" className="hidden">
+                        <MessageCircle className=" md:h-4 md:w-4 h-2 w-2 mr-1 md:mr-2" />
                         {mockComments.length} Comments
-                      </Button>
+                      </Button> */}
                     </div>
                     <SocialShare title={post.title} url={`/blog/${post.slug}`} />
                   </div>
@@ -257,7 +257,7 @@ export default function BlogPost({ params }: BlogPostPageProps) {
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-border/50">
-                      <span className="text-sm font-medium text-muted-foreground mr-2">Tags:</span>
+                      <span className="text-sm font-medium text-muted-foreground mr-1 md:mr-2">Tags:</span>
                       {post.tags.map((tag) => (
                         <Badge
                           key={tag}
@@ -295,7 +295,7 @@ export default function BlogPost({ params }: BlogPostPageProps) {
                       </p>
                       <div className="flex items-center gap-4">
                         <Button variant="outline" size="sm">
-                          <User className="h-4 w-4 mr-2" />
+                          <User className="md:h-4 md:w-4 h-2 w-2 mr-1 md:mr-2" />
                           View Profile
                         </Button>
                         <Button variant="ghost" size="sm">
@@ -314,7 +314,7 @@ export default function BlogPost({ params }: BlogPostPageProps) {
               <Card className="mt-8 shadow-lg border-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
                 <CardHeader>
                   <h3 className="text-2xl font-bold flex items-center">
-                    <MessageCircle className="h-6 w-6 mr-2 text-purple-600" />
+                    <MessageCircle className="h-6 w-6 mr-1 md:mr-2 text-purple-600" />
                     Comments ({mockComments.length})
                   </h3>
                 </CardHeader>

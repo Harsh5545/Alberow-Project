@@ -280,7 +280,7 @@ export function HeroSection() {
               className="relative"
             >
               {/* 3D Layered Device Mockups */}
-              <div className="relative w-full h-[500px]">
+              <div className="relative w-full min-h-[220px] h-full   md:h-[500px]">
                 {/* Desktop */}
                 <motion.div
                   className="absolute top-0 left-0 right-0 mx-auto w-[90%] h-auto rounded-lg overflow-hidden shadow-2xl"
@@ -298,6 +298,7 @@ export function HeroSection() {
                   className="absolute bottom-10 right-0 w-[40%] h-auto rounded-lg overflow-hidden shadow-xl"
                   style={{ z: 20, translateZ: "20px" }}
                 >
+                  
                   {/* <Image
                     src="/placeholder.svg?height=300&width=400"
                     alt="Tablet Website"
@@ -374,7 +375,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="mt-16 grid grid-cols-3 md:grid-cols-6 gap-4 md:gap-8 text-center"
+          className="mt-16 hidden md:grid grid-cols-3 md:grid-cols-6 gap-4 md:gap-8 text-center"
         >
           {[
             { icon: <Code />, label: "Web Development" },

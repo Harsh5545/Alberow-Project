@@ -78,7 +78,7 @@ export function Navbar() {
       ref={navRef}
       className={cn(
         "sticky top-0 w-full z-50 transition-all duration-300",
-        scrolled ? "bg-background/80 backdrop-blur-md shadow-md py-2" : "bg-transparent py-4"
+        scrolled ? "bg-background/80 backdrop-blur-md shadow-md py-2" : "bg-transparent py-4",
       )}
     >
       <div className="container mx-auto px-4">
@@ -102,14 +102,14 @@ export function Navbar() {
                 href={link.href}
                 className={cn(
                   "text-foreground/80 hover:text-foreground transition-colors relative group py-2",
-                  activeSection === link.href.replace("#", "") && "text-foreground font-medium"
+                  activeSection === link.href.replace("#", "") && "text-foreground font-medium",
                 )}
               >
                 {link.name}
                 <span
                   className={cn(
                     "absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-300 group-hover:w-full",
-                    activeSection === link.href.replace("#", "") ? "w-full" : "w-0"
+                    activeSection === link.href.replace("#", "") ? "w-full" : "w-0",
                   )}
                 />
               </a>
@@ -172,55 +172,119 @@ export function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0, y: -20 }}
-            animate={{ opacity: 1, height: "100vh", y: 0 }}
-            exit={{ opacity: 0, height: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 top-0 z-0 md:hidden bg-background/95 backdrop-blur-md pt-20"
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className=" inset-y-0 fixed right-0 z-40 w-full max-w-sm bg-background/95 backdrop-blur-xl border-l border-border/50 md:hidden shadow-2xl"
           >
-            <div className="container mx-auto px-4 py-4 h-full flex flex-col">
-              <div className="flex-1 flex flex-col justify-center space-y-8">
+            <div className="flex flex-col  px-6 py-6">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-6 pt-12 flex-shrink-0">
+                <motion.h2
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+                >
+                  Navigation
+                </motion.h2>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsOpen(false)}
+                  aria-label="Close Menu"
+                  className="h-8 w-8 rounded-lg hover:bg-muted/50"
+                >
+                  <X size={20} />
+                </Button>
+              </div>  
+
+              {/* Navigation Links */}
+              <nav className="flex-1 pb-16 space-y-2">
                 {navLinks.map((link, index) => (
                   <motion.div
                     key={link.name}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.1 + 0.1 }}
                   >
                     <a
                       href={link.href}
                       className={cn(
-                        "text-foreground/80 hover:text-foreground py-2 transition-colors text-2xl font-medium flex items-center",
-                        activeSection === link.href.replace("#", "") && "text-foreground font-bold"
+                        "group flex items-center space-x-4 px-4 py-4 rounded-xl transition-all duration-200 hover:bg-muted/50",
+                        activeSection === link.href.replace("#", "")
+                          ? "bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 text-foreground border border-purple-200/50 dark:border-purple-800/50"
+                          : "text-foreground/70 hover:text-foreground",
                       )}
                       onClick={() => setIsOpen(false)}
                     >
-                      <motion.span
-                        initial={{ width: 0 }}
-                        animate={{ width: activeSection === link.href.replace("#", "") ? 24 : 0 }}
-                        className="h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 mr-2"
+                      <div
+                        className={cn(
+                          "w-2 h-2 rounded-full transition-all duration-200",
+                          activeSection === link.href.replace("#", "")
+                            ? "bg-gradient-to-r from-purple-600 to-pink-600"
+                            : "bg-muted group-hover:bg-foreground/30",
+                        )}
                       />
-                      {link.name}
+                      <span className="text-base font-medium">{link.name}</span>
+                      <motion.div
+                        className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
+                        whileHover={{ x: 2 }}
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </motion.div>
                     </a>
                   </motion.div>
                 ))}
-              </div>
+              </nav>
+
+              {/* Bottom Section */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="py-8"
+                className="space-y-4 pt-6 border-t border-border/50"
               >
+                {/* Social Links or Additional Info */}
+                <div className="flex items-center justify-center space-x-4 py-2">
+                  <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                    <span>Available for projects</span>
+                  </div>
+                </div>
+
+                {/* Get Started Button */}
                 <Button
                   asChild
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white w-full py-6 text-lg"
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-200"
                   onClick={() => setIsOpen(false)}
                 >
-                  <a href="#contact">Get Started</a>
+                  <a href="#contact" className="flex items-center justify-center space-x-2">
+                    <span>Get Started</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </a>
                 </Button>
               </motion.div>
             </div>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Backdrop */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 md:hidden"
+            onClick={() => setIsOpen(false)}
+          />
         )}
       </AnimatePresence>
     </header>
