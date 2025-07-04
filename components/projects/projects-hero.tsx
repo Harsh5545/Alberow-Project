@@ -19,7 +19,7 @@ export function ProjectsHero() {
   return (
     <section className="pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-gradient-to-br from-background via-muted/30 to-background">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between">
+        <div className="flex flex-col md:flex-row items-center justify-center">
           <motion.div
             className="text-left max-w-2xl mb-10 md:mb-0"
             initial={{ opacity: 0, x: -50 }}

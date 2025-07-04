@@ -151,7 +151,7 @@ export function ProjectsGrid() {
         </motion.div>
 
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <DialogContent className="max-w-4xl p-0 overflow-hidden bg-background rounded-lg w-[95vw] max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-4xl p-0 overflow-hidden hide-scrollbar bg-background rounded-lg w-[95vw] max-h-[90vh] overflow-y-auto">
             {selectedProject && (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -221,7 +221,7 @@ export function ProjectsGrid() {
                   )}
                 </div>
 
-                <div className="p-4 md:p-6">
+                <div className="p-4 md:p-6 hide-scrollbar">
                   <DialogHeader>
                     <DialogTitle className="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
                       {selectedProject.title}

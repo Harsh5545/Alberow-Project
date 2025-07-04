@@ -180,7 +180,7 @@ export function Navbar() {
           >
             <div className="flex flex-col  px-6 py-6">
               {/* Header */}
-              <div className="flex items-center justify-between mb-6 pt-12 flex-shrink-0">
+              <div className="flex items-center justify-between mb-6 flex-shrink-0">
                 <motion.h2
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}

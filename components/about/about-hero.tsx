@@ -8,7 +8,7 @@ export function AboutHero() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section className="pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-gradient-to-bl from-purple-500/5 via-background to-pink-500/5">
+    <section className="pt-24  pb-20 md:pt-40 md:pb-28 overflow-hidden bg-gradient-to-bl from-purple-500/5 via-background to-pink-500/5">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -90,7 +90,7 @@ export function AboutHero() {
             />
             <div className="relative rounded-lg overflow-hidden shadow-xl">
               <Image
-                src="./assets/AboutAlberow.png"
+                src="./assets/AboutAlberow.webp"
                 alt="Alberow Team"
                 width={800}
                 height={600}
