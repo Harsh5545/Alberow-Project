@@ -73,9 +73,9 @@ export const projects: Project[] = [
       "Created a visually striking website with smooth animations, intuitive navigation, and responsive design that captures the essence of modern lifestyle.",
     results: "Enhanced brand visibility with improved user engagement and modern digital presence.",
     images: [
-      "/assets/modern1.webp",
-      "/assets/modern2.webp",
-      "/assets/modern3.webp",
+      "/assets/MM.webp",
+      "/assets/MM2.webp",
+      "/assets/MM3.webp",
     ],
     liveUrl: "https://www.modernmannerism.com",
     type: "multi-page",
