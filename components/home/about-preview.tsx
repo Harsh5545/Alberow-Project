@@ -47,7 +47,7 @@ export function AboutPreview() {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 <Image
-                  src="/assets/ai/dveloper.avif"
+                  src="/assets/ai/dveloper.webp"
                   alt="Alberow Team"
                   width={800}
                   height={600}

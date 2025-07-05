@@ -105,7 +105,7 @@ export const blogPosts: BlogPost[] = [
     `,
     date: "December 12, 2024",
     author: "Michael Chen",
-    image: "/assets/ai/app-development-concept-illustration_114360-5110.avif",
+    image: "/assets/ai/app-development-concept-illustration_114360-5110.webp",
     slug: "future-web-development-trends-2025",
     category: "Web Development",
     tags: ["Web Development", "Technology", "Trends", "AI"],
