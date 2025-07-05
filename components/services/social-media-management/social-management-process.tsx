@@ -44,7 +44,7 @@ const process = [
 
 export function SocialManagementProcess() {
   return (
-    <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900">
+    <section className="py-16 md:py-24 bg-gray-50 flex justify-center items-center dark:bg-gray-900">
       <div className="container px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

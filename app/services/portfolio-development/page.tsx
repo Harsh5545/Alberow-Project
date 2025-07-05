@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "Stunning portfolio websites that showcase your work and attract clients. Perfect for creatives, photographers, designers, artists, and professionals.",
     images: [
       {
-        url: "/images/services/portfolio-development-og.jpg",
+        url: "/assets/ai/website-designer-concept-illustration_114360-4449.webp",
         width: 1200,
         height: 630,
         alt: "Alberow Portfolio Development Services",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "Portfolio Website Design & Development Services | Alberow",
     description:
       "Stunning portfolio websites that showcase your work and attract clients. Perfect for creatives, photographers, designers, artists, and professionals.",
-    images: ["/images/services/portfolio-development-og.jpg"],
+    images: ["/assets/ai/website-designer-concept-illustration_114360-4449.webp"],
   },
   keywords:
     "portfolio website, creative portfolio, photographer portfolio, designer portfolio, artist portfolio, professional portfolio, portfolio design, portfolio development, responsive portfolio, interactive portfolio",

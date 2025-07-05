@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description:
       "Comprehensive management of your social media presence to build and engage your audience effectively.",
     images: [
-      { url: "/images/services/social-media-management.jpg", width: 1200, height: 630, alt: "Social Media Management" },
+      { url: "/assets/ai/ui-ux-designers-isometric-composition-with-small-people-creating-custom-design-web-site-3d-vector-illustration_1284-68939.webp", width: 1200, height: 630, alt: "Social Media Management" },
     ],
   },
   twitter: {
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Social Media Management Services | Alberow",
     description:
       "Comprehensive management of your social media presence to build and engage your audience effectively.",
-    images: ["/images/services/social-media-management.jpg"],
+    images: ["/assets/ai/ui-ux-designers-isometric-composition-with-small-people-creating-custom-design-web-site-3d-vector-illustration_1284-68939.webp"],
   },
 }
 
@@ -37,9 +37,10 @@ export default function SocialMediaManagementPage() {
     <main className="min-h-screen">
       <Navbar />
       <SocialManagementHero />
-      <SocialManagementFeatures />
+      
       <SocialManagementProcess />
-      <SocialManagementShowcase />
+      <SocialManagementFeatures />
+      {/* <SocialManagementShowcase /> */}
       <SocialManagementPricing />
       <SocialManagementTestimonials />
       <SocialManagementFaq />

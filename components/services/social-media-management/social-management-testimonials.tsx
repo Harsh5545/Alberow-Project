@@ -30,7 +30,7 @@ const testimonials = [
 
 export function SocialManagementTestimonials() {
   return (
-    <section className="py-16 md:py-24">
+    <section className="py-16 flex justify-center items-center md:py-24">
       <div className="container px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

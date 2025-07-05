@@ -150,7 +150,7 @@ export default function BlogPost({ params }: BlogPostPageProps) {
     <Navbar/>
       <BlogProgressIndicator />
 
-      <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-purple-950/30">
+      <main className="min-h-screen overflow-x-hidden bg-gradient-to-br from-slate-50 via-white to-purple-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-purple-950/30">
         {/* Hero Section */}
         <div className="relative bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600 text-white">
           <div className="absolute inset-0 bg-black/20"></div>

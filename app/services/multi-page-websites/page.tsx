@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "Comprehensive multi-page websites that provide in-depth information and functionality for businesses of all sizes. Perfect for complex offerings and content-rich sites.",
     images: [
       {
-        url: "/images/services/multi-page-websites-og.jpg",
+        url: "/assets/ai/website-designer-concept-illustration_114360-4449.webp",
         width: 1200,
         height: 630,
         alt: "Alberow Multi-Page Website Services",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "Multi-Page Website Design & Development Services | Alberow",
     description:
       "Comprehensive multi-page websites that provide in-depth information and functionality for businesses of all sizes. Perfect for complex offerings and content-rich sites.",
-    images: ["/images/services/multi-page-websites-og.jpg"],
+    images: ["/assets/ai/website-designer-concept-illustration_114360-4449.webp",],
   },
   keywords:
     "multi-page website, business website, corporate website, e-commerce website, content management system, CMS, responsive website, website development, SEO optimized website, fast loading website",

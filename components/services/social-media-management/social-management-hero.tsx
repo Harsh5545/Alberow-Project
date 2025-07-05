@@ -7,7 +7,7 @@ import Image from "next/image"
 
 export function SocialManagementHero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white dark:from-blue-950/20 dark:to-background pt-24 pb-16 md:pt-28 md:pb-20">
+    <section className="relative flex justify-center items-center overflow-hidden bg-gradient-to-b from-blue-50 to-white dark:from-blue-950/20 dark:to-background pt-24 pb-16 md:pt-28 md:pb-20">
       <div className="absolute inset-0 bg-grid-black/[0.02] dark:bg-grid-white/[0.02]" />
 
       <div className="container px-4 md:px-6">
@@ -93,7 +93,7 @@ export function SocialManagementHero() {
           >
             <div className="relative w-full max-w-[500px] aspect-square">
               <Image
-                src="/placeholder.svg?height=600&width=600"
+                src="/assets/ai/ui-ux-designers-isometric-composition-with-small-people-creating-custom-design-web-site-3d-vector-illustration_1284-68939.webp"
                 alt="Social Media Management"
                 width={600}
                 height={600}

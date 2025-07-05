@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "Impactful single-page websites that effectively showcase your brand and convert visitors. Perfect for startups, portfolios, and focused business offerings.",
     images: [
       {
-        url: "/images/services/one-page-websites-og.jpg",
+        url: "/assets/ai/website-designer-concept-illustration_114360-4449.webp",
         width: 1200,
         height: 630,
         alt: "Alberow One-Page Website Services",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "One-Page Website Design & Development Services | Alberow",
     description:
       "Impactful single-page websites that effectively showcase your brand and convert visitors. Perfect for startups, portfolios, and focused business offerings.",
-    images: ["/images/services/one-page-websites-og.jpg"],
+    images: ["/assets/ai/website-designer-concept-illustration_114360-4449.webp"],
   },
   keywords:
     "one-page website, single page website, landing page design, responsive website, website development, smooth scrolling, SEO optimized website, fast loading website, portfolio website, startup website",

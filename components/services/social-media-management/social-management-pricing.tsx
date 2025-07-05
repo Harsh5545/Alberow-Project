@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 const pricingPlans = [
   {
     title: "Basic Management",
-    price: "$1,200",
+    price: "8,000",
     period: "per month",
     description: "Perfect for small businesses looking to maintain a consistent social media presence.",
     features: [
@@ -22,7 +22,7 @@ const pricingPlans = [
   },
   {
     title: "Professional Management",
-    price: "$2,500",
+    price: "15,000",
     period: "per month",
     description: "Ideal for growing businesses that need comprehensive social media management.",
     features: [
@@ -39,7 +39,7 @@ const pricingPlans = [
   },
   {
     title: "Enterprise Management",
-    price: "$4,000+",
+    price: "30,000+",
     period: "per month",
     description: "For large businesses with complex social media needs and multiple target audiences.",
     features: [
@@ -60,7 +60,7 @@ const pricingPlans = [
 
 export function SocialManagementPricing() {
   return (
-    <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900">
+    <section className="py-16 flex justify-center items-center md:py-24 bg-gray-50 dark:bg-gray-900">
       <div className="container px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

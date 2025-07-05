@@ -19,14 +19,14 @@ export const metadata: Metadata = {
     title: "Social Media Marketing Services | Alberow",
     description: "Strategic social media campaigns that increase engagement and drive conversions for your business.",
     images: [
-      { url: "/images/services/social-media-marketing.jpg", width: 1200, height: 630, alt: "Social Media Marketing" },
+      { url: "/assets/ai/ui-ux-designers-isometric-composition-with-small-people-creating-custom-design-web-site-3d-vector-illustration_1284-68939.webp", width: 1200, height: 630, alt: "Social Media Marketing" },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Social Media Marketing Services | Alberow",
     description: "Strategic social media campaigns that increase engagement and drive conversions for your business.",
-    images: ["/images/services/social-media-marketing.jpg"],
+    images: ["/assets/ai/ui-ux-designers-isometric-composition-with-small-people-creating-custom-design-web-site-3d-vector-illustration_1284-68939.webp"],
   },
 }
 

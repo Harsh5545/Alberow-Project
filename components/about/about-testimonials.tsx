@@ -2,32 +2,31 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
+import { ChevronLeft, ChevronRight, Quote, User, UserRound } from "lucide-react"
 
 const testimonials = [
   {
     quote:
       "Alberow transformed our online presence completely. Their team's expertise in web development and SEO has significantly increased our traffic and conversions.",
-    author: "Sarah Johnson",
-    position: "CEO, TechStart Inc.",
-    image: "/placeholder.svg?height=100&width=100",
+    author: "Manasi Kadam",
+    position: "CEO, Modern Mannerism",
+    gender: "female",
   },
   {
     quote:
       "Working with Alberow was a game-changer for our business. Their attention to detail and creative approach to problem-solving exceeded our expectations.",
-    author: "Michael Chen",
-    position: "Marketing Director, GrowthHub",
-    image: "/placeholder.svg?height=100&width=100",
+    author: "Dipak Saidane",
+    position: "Marketing Director, Dimond Beauty Zone",
+    gender: "male",
   },
   {
     quote:
       "The team at Alberow delivered our e-commerce platform on time and within budget. The results have been outstanding, with a 40% increase in online sales.",
-    author: "Emily Rodriguez",
+    author: "Neha Salekar",
     position: "Founder, StyleShop",
-    image: "/placeholder.svg?height=100&width=100",
+    gender: "female",
   },
 ]
 
@@ -84,13 +83,13 @@ export function AboutTestimonials() {
                     <div className="flex-shrink-0">
                       <div className="relative">
                         <div className="absolute -top-2 -left-2 w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full -z-10" />
-                        <Image
-                          src={testimonials[currentIndex].image || "/placeholder.svg"}
-                          alt={testimonials[currentIndex].author}
-                          width={80}
-                          height={80}
-                          className="rounded-full object-cover"
-                        />
+                        <div className="w-20 h-20 rounded-full flex items-center justify-center bg-muted">
+                          {testimonials[currentIndex].gender === "female" ? (
+                            <UserRound className="w-12 h-12 text-pink-500" aria-label="Female" />
+                          ) : (
+                            <User className="w-12 h-12 text-blue-500" aria-label="Male" />
+                          )}
+                        </div>
                       </div>
                     </div>
                     <div className="flex-1">

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "Custom mobile and web applications that deliver exceptional user experiences and drive business growth. Our expert team builds native iOS, Android, and cross-platform solutions.",
     images: [
       {
-        url: "/images/services/application-development-og.jpg",
+        url: "/assets/ai/website-designer-concept-illustration_114360-4449.webp",
         width: 1200,
         height: 630,
         alt: "Alberow Application Development Services",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "Mobile & Web Application Development Services | Alberow",
     description:
       "Custom mobile and web applications that deliver exceptional user experiences and drive business growth. Our expert team builds native iOS, Android, and cross-platform solutions.",
-    images: ["/images/services/application-development-og.jpg"],
+    images: ["/assets/ai/website-designer-concept-illustration_114360-4449.webp"],
   },
   keywords:
     "mobile app development, iOS development, Android development, cross-platform apps, React Native, Flutter, web applications, custom app development, app design, mobile UX/UI",

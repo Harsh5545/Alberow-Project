@@ -12,7 +12,60 @@ import { ServiceCta } from "@/components/services/service-cta"
 export const metadata: Metadata = {
   title: "SEO Optimization Services | Alberow",
   description:
-    "Boost your website's visibility and rankings with our comprehensive SEO optimization services. Drive more organic traffic and increase conversions.",
+    "Boost your website's visibility and rankings with Alberow's comprehensive SEO optimization services. Increase organic traffic, improve search engine rankings, and grow your business with proven SEO strategies.",
+  keywords: [
+    "SEO",
+    "SEO Optimization",
+    "Search Engine Optimization",
+    "SEO Services",
+    "SEO Company",
+    "SEO Agency",
+    "Increase Website Traffic",
+    "Google Rankings",
+    "On-page SEO",
+    "Off-page SEO",
+    "Technical SEO",
+    "SEO Audit",
+    "SEO Strategy",
+    "Alberow"
+  ],
+  openGraph: {
+    title: "SEO Optimization Services | Alberow",
+    description:
+      "Boost your website's visibility and rankings with Alberow's comprehensive SEO optimization services. Increase organic traffic, improve search engine rankings, and grow your business with proven SEO strategies.",
+    url: "https://alberow.com/services/seo-optimization",
+    siteName: "Alberow",
+    images: [
+      {
+        url: "/assets/ai/Seo.webp",
+        width: 1200,
+        height: 630,
+        alt: "SEO Optimization Services by Alberow",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SEO Optimization Services | Alberow",
+    description:
+      "Boost your website's visibility and rankings with Alberow's comprehensive SEO optimization services.",
+    images: ["/assets/ai/Seo.webp"],
+    creator: "@alberow",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 }
 
 export default function SeoOptimizationPage() {
