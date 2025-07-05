@@ -1,33 +1,32 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Star, Quote } from "lucide-react"
-import Image from "next/image"
+import { Star, Quote, User, UserRound } from "lucide-react"
 
 export function ApplicationDevTestimonials() {
   const testimonials = [
     {
       quote:
         "Alberow transformed our business idea into a stunning mobile app that our customers love. The attention to detail and user experience design is exceptional.",
-      author: "Sarah Johnson",
+      author: "Sidhesh Thorat",
       position: "CEO, FitLife",
-      avatar: "/placeholder.svg?height=80&width=80",
+      gender: "female",
       rating: 5,
     },
     {
       quote:
         "The team at Alberow delivered our food delivery app on time and within budget. Their technical expertise and communication throughout the project was outstanding.",
-      author: "Michael Chen",
+      author: "Amol Sangale",
       position: "Founder, QuickBite",
-      avatar: "/placeholder.svg?height=80&width=80",
+      gender: "male",
       rating: 5,
     },
     {
       quote:
         "Working with Alberow on our e-learning platform was a game-changer. They understood our vision and created an intuitive, feature-rich application that exceeded our expectations.",
-      author: "Emily Rodriguez",
-      position: "Director, EduTech Solutions",
-      avatar: "/placeholder.svg?height=80&width=80",
+      author: "Vanita Deshmukh",
+      position: "Director, Vanita Masale",
+      gender: "female",
       rating: 5,
     },
   ]
@@ -72,13 +71,12 @@ export function ApplicationDevTestimonials() {
               <p className="text-foreground/80 italic mb-6">"{testimonial.quote}"</p>
 
               <div className="flex items-center">
-                <div className="relative h-12 w-12 rounded-full overflow-hidden mr-4">
-                  <Image
-                    src={testimonial.avatar || "/placeholder.svg"}
-                    alt={testimonial.author}
-                    fill
-                    className="object-cover"
-                  />
+                <div className="h-12 w-12 rounded-full flex items-center justify-center bg-muted mr-4">
+                  {testimonial.gender === "female" ? (
+                    <UserRound className="w-8 h-8 text-pink-500" aria-label="Female" />
+                  ) : (
+                    <User className="w-8 h-8 text-blue-500" aria-label="Male" />
+                  )}
                 </div>
                 <div>
                   <h4 className="font-semibold">{testimonial.author}</h4>

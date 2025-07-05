@@ -9,7 +9,7 @@ export function OnePageTestimonials() {
     {
       quote:
         "Alberow created a stunning one-page website for my restaurant that perfectly captures our brand and has significantly increased our online reservations.",
-      author: "David Chen",
+      author: "Roshan Lad",
       position: "Owner, Fusion Kitchen",
       avatar: "/placeholder.svg?height=80&width=80",
       rating: 5,
