@@ -207,7 +207,7 @@ export const blogPosts: BlogPost[] = [
       <p>Remember, great UI/UX design is invisible to users—they should be able to accomplish their goals effortlessly. Focus on removing friction, building trust, and guiding users toward conversion with thoughtful, user-centered design.</p>
     `,
     date: "December 8, 2024",
-    author: "David Kim",
+    author: "Harsh Kajale",
     image: "/assets/ai/ui/ux.webp",
     slug: "ui-ux-design-principles-conversions",
     category: "Design",
