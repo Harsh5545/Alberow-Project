@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation"
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
-import { Menu, X, ChevronDown, Code, Smartphone, Globe, Zap, ArrowRight, Phone, Mail } from "lucide-react"
+import { Menu, X, ChevronDown, Code, Smartphone, Globe, Zap, ArrowRight, Phone, Mail, FileText, Files, Users, Share2, Image } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 
@@ -17,11 +17,15 @@ const navLinks = [
     name: "Services",
     href: "/services",
     description: "Our web development solutions",
-    submenu: [
+   submenu: [
       { name: "Web Development", href: "/web-development", icon: Code },
-      { name: "Mobile Apps", href: "/mobile-apps", icon: Smartphone },
-      { name: "E-commerce", href: "/ecommerce", icon: Globe },
-      { name: "Performance Optimization", href: "/optimization", icon: Zap },
+      { name: "Mobile Apps", href: "/application-development", icon: Smartphone },
+      { name: "SEO Optimization", href: "/seo-optimization", icon: Globe },
+      { name: "One-Page Websites", href: "/one-page-websites", icon: FileText },
+      { name: "Multi-Page Websites", href: "/multi-page-websites", icon: Files },
+      { name: "Portfolio Development", href: "/portfolio-development", icon: Image },
+      { name: "Social Media Marketing", href: "/social-media-marketing", icon: Share2 },
+      { name: "Social Media Management", href: "/social-media-management", icon: Users }
     ],
   },
   {
@@ -39,11 +43,11 @@ const navLinks = [
     href: "/blog",
     description: "Latest insights and tutorials",
   },
-  {
-    name: "Contact",
-    href: "/contact",
-    description: "Get in touch with our team",
-  },
+  // {
+  //   name: "Contact",
+  //   href: "/contact",
+  //   description: "Get in touch with our team",
+  // },
 ]
 
 export function Navbar() {
@@ -234,18 +238,18 @@ const handleSubmenuLeave = () => {
   aria-label="Alberow - Web Development Agency"
 >
   <div className="relative">
-    <motion.div
+    {/* <motion.div
       className="w-10 h-10 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 rounded-xl flex items-center justify-center shadow-lg"
       whileHover={{ scale: 1.05, rotate: 5 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
     >
       <Code className="w-5 h-5 text-white" />
-    </motion.div>
-    <motion.div className="absolute -inset-1 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 rounded-xl opacity-0 group-hover:opacity-20 blur transition-opacity duration-300" />
+    </motion.div> */}
+    {/* <motion.div className="absolute -inset-1 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 rounded-xl opacity-0 group-hover:opacity-20 blur transition-opacity duration-300" /> */}
   </div>
   <div className="flex flex-col">
     <motion.span
-      className="font-bold text-xl bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent"
+      className="font-bold text-3xl bg-gradient-to-r from-[#9433E8] via-pink-600 to-[#BF2BA2] bg-clip-text text-transparent"
       whileHover={{ scale: 1.02 }}
     >
       Alberow
@@ -371,7 +375,7 @@ const handleSubmenuLeave = () => {
               >
                 <Button
                   asChild
-                  className="bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 hover:from-purple-700 hover:via-pink-700 hover:to-orange-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 group"
+                  className="bg-gradient-to-r from-[#9433E8]  to-[#BF2BA2] hover:from-purple-700 hover:via-pink-700 hover:to-[#BF2BA2] text-white shadow-lg hover:shadow-xl transition-all duration-300 group"
                 >
                   <a
                     href="#contact"
