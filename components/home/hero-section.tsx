@@ -191,14 +191,14 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tightest"
             >
               We Create{" "}
               <span className="relative">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
                   Digital Experiences
                 </span>
-                <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full"></span>
+                {/* <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full"></span> */}
               </span>
               <br />
               That Inspire

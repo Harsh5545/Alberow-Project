@@ -33,7 +33,8 @@ const createTransporter = () => {
     user: config.auth.user,
   })
 
-  return nodemailer.createTransporter(config)
+  return nodemailer.createTransport(config)
+
 }
 
 export async function POST(request: NextRequest) {
@@ -108,7 +109,7 @@ export async function POST(request: NextRequest) {
     let customerEmailResult
     try {
       customerEmailResult = await transporter.sendMail({
-        from: `"Alberow Team" <hello@alberow.com>`,
+        from: `"Alberow Team" <noreply@alberow.com>`,
         to: data.email,
         subject: "🎉 Thank you for contacting Alberow - We'll be in touch soon!",
         html: getCustomerEmailTemplate(data.name),
