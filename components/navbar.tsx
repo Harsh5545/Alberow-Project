@@ -381,7 +381,7 @@ const handleSubmenuLeave = () => {
                     href="#contact"
                     onClick={(e) => {
                       e.preventDefault()
-                      handleNavClick("#contact")
+                      handleNavClick("/contact")
                     }}
                     className="flex items-center space-x-2"
                   >

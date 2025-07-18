@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://alberow.com
+
+# Sitemaps
+Sitemap: https://alberow.com/sitemap.xml
