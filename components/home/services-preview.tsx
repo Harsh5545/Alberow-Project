@@ -53,7 +53,7 @@ export function ServicesPreview() {
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <motion.h2
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -62,8 +62,8 @@ export function ServicesPreview() {
           >
             Our{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">Services</span>
-          </motion.h2>
-          <motion.p
+          </motion.p>
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -72,7 +72,7 @@ export function ServicesPreview() {
           >
             We offer a comprehensive range of digital services to help your business establish a powerful online
             presence.
-          </motion.p>
+          </motion.h2>
         </div>
 
         <motion.div
@@ -98,7 +98,7 @@ export function ServicesPreview() {
                   >
                     {service.icon}
                   </motion.div>
-                  <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                  <p className="text-xl font-semibold mb-2">{service.title}</p>
                   <p className="text-foreground/70 mb-4">{service.description}</p>
                 </CardContent>
               </Card>

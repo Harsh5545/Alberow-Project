@@ -37,7 +37,7 @@ export function CtaSection() {
           </div>
 
           <div className="relative z-10">
-            <motion.h2
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -45,7 +45,7 @@ export function CtaSection() {
               className="text-3xl md:text-4xl font-bold mb-4"
             >
               Ready to Transform Your Digital Presence?
-            </motion.h2>
+            </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

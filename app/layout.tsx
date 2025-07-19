@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
+// import { PageLoader } from '@/components/page-loader'
+// import { AlberowLoader } from '@/components/alberow-loader'
 
 export const metadata: Metadata = {
   title: 'Alberow - Professional Web Development',
@@ -78,6 +80,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body> <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        {/* <AlberowLoader /> */}
           {children}
         </ThemeProvider></body>
     </html>

@@ -125,7 +125,7 @@ export function TeamPreview() {
                   </div>
                 </div>
                 <CardContent className="p-6 text-center">
-                  <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
+                  <p className="text-xl font-semibold mb-1">{member.name}</p>
                   <p className="text-foreground/70">{member.role}</p>
                 </CardContent>
               </Card>

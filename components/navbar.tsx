@@ -457,9 +457,9 @@ const handleSubmenuLeave = () => {
                     <Code className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <h2 className="font-bold text-lg bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent">
+                    <p className="font-bold text-lg bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent">
                       Alberow
-                    </h2>
+                    </p>
                     <p className="text-xs text-muted-foreground">Web Development</p>
                   </div>
                 </motion.div>

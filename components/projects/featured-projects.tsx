@@ -71,9 +71,9 @@ export function FeaturedProjects() {
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                 </div>
                 <CardContent className="p-4 md:p-6">
-                  <h3 className="text-lg md:text-xl font-semibold mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors line-clamp-1">
+                  <p className="text-lg md:text-xl font-semibold mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors line-clamp-1">
                     {project.title}
-                  </h3>
+                  </p>
                   <p className="text-foreground/70 mb-4 text-sm md:text-base line-clamp-2">{project.description}</p>
                   <div className="flex flex-wrap gap-1 md:gap-2 mb-4">
                     {project.technologies.slice(0, 3).map((tech, i) => (

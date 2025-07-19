@@ -68,7 +68,7 @@ export function AboutTeam() {
     <section className="py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <motion.h2
+          <motion.h5
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -77,7 +77,7 @@ export function AboutTeam() {
           >
             Meet Our{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">Team</span>
-          </motion.h2>
+          </motion.h5>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -106,7 +106,7 @@ export function AboutTeam() {
                       <User className="h-6 w-6 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
+                      <p className="text-xl font-semibold mb-1">{member.name}</p>
                       <p className="text-purple-600 dark:text-purple-400 font-medium">{member.role}</p>
                     </div>
                   </div>

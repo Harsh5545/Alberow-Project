@@ -24,7 +24,7 @@ export function ProjectsPreview() {
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <motion.h2
+          <motion.h4
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -33,7 +33,7 @@ export function ProjectsPreview() {
           >
             Featured{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">Projects</span>
-          </motion.h2>
+          </motion.h4>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -85,9 +85,9 @@ export function ProjectsPreview() {
 
                 <CardContent className="p-6">
                   <div className="mb-3">
-                    <h3 className="text-xl font-semibold mb-1 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                    <p className="text-xl font-semibold mb-1 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                       {project.title}
-                    </h3>
+                    </p>
                     <p className="text-sm text-foreground/60">{project.client}</p>
                   </div>
 

@@ -41,7 +41,7 @@ export function AboutProcess() {
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <motion.h2
+          <motion.h3
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -50,7 +50,7 @@ export function AboutProcess() {
           >
             Our{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">Process</span>
-          </motion.h2>
+          </motion.h3>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ export function AboutProcess() {
                 <div className="absolute -top-2 -left-2 w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full -z-10" />
                 <div className="relative z-10">{step.icon}</div>
               </div>
-              <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
+              <p className="text-xl font-semibold mb-3">{step.title}</p>
               <p className="text-foreground/70">{step.description}</p>
             </motion.div>
           ))}

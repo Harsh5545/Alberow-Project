@@ -45,7 +45,7 @@ export function AboutTestimonials() {
     <section className="py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <motion.h2
+          <motion.h6
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -56,7 +56,7 @@ export function AboutTestimonials() {
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
               Clients Say
             </span>
-          </motion.h2>
+          </motion.h6>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

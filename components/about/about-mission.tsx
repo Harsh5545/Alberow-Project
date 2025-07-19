@@ -65,7 +65,7 @@ export function AboutMission() {
                   <CheckCircle className="h-6 w-6 text-purple-600 dark:text-purple-400" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">{value.title}</h3>
+                  <p className="text-xl font-semibold mb-2">{value.title}</p>
                   <p className="text-foreground/70">{value.description}</p>
                 </div>
               </div>

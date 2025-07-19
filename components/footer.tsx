@@ -55,7 +55,7 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
+            <p className="font-semibold text-lg mb-4">Quick Links</p>
             <ul className="space-y-3">
               <li>
                 <Link href="/" className="text-foreground/70 hover:text-purple-600 transition-colors">
@@ -101,7 +101,7 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h3 className="font-semibold text-lg mb-4">Services</h3>
+            <p className="font-semibold text-lg mb-4">Services</p>
             <ul className="space-y-3">
               <li>
                 <Link href="/services" className="text-foreground/70 hover:text-purple-600 transition-colors">
@@ -142,7 +142,7 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <h3 className="font-semibold text-lg mb-4">Newsletter</h3>
+            <p className="font-semibold text-lg mb-4">Newsletter</p>
             <p className="text-foreground/70 mb-4">Subscribe to our newsletter to receive updates and insights.</p>
             <div className="flex space-x-2">
               <Input type="email" placeholder="Your email" className="flex-1" />

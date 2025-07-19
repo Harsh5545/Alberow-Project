@@ -16,7 +16,7 @@ export function BlogPreview() {
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <motion.h2
+          <motion.h5
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -25,8 +25,8 @@ export function BlogPreview() {
           >
             Latest from our{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">Blog</span>
-          </motion.h2>
-          <motion.p
+          </motion.h5>
+          <motion.h6
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -34,7 +34,7 @@ export function BlogPreview() {
             className="text-foreground/70 max-w-2xl mx-auto"
           >
             Stay updated with our latest insights, tips, and industry news to help grow your business.
-          </motion.p>
+          </motion.h6>
         </div>
 
         <motion.div
@@ -78,7 +78,7 @@ export function BlogPreview() {
                     href={`/blog/${post.slug}`}
                     className="group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors"
                   >
-                    <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
+                    <p className="text-xl font-semibold mb-2">{post.title}</p>
                   </Link>
                   <p className="text-foreground/70">{post.excerpt}</p>
                 </CardContent>

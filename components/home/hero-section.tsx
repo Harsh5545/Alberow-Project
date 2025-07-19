@@ -280,7 +280,7 @@ export function HeroSection() {
               className="relative"
             >
               {/* 3D Layered Device Mockups */}
-              <div className="relative w-full min-h-[220px] h-full   md:h-[500px]">
+              <div className="relative w-full min-h-[220px] h-full hidden md:flex  md:h-[500px]">
                 {/* Desktop */}
                 <motion.div
                   className="absolute top-0 left-0 right-0 mx-auto w-[90%] h-auto rounded-lg overflow-hidden shadow-2xl"
@@ -461,14 +461,14 @@ export function HeroSection() {
               >
                 <span className="text-gradient">{item.icon}</span>
               </motion.div>
-              <h3 className="font-medium text-sm">{item.label}</h3>
+              <p className="font-medium text-sm">{item.label}</p>
             </motion.div>
           ))}
         </motion.div>
 
         {/* Scroll indicator */}
         <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          className="absolute hidden md:flex bottom-10 left-1/2 transform -translate-x-1/2"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
         >

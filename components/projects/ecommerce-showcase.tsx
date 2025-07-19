@@ -41,7 +41,7 @@ export function EcommerceShowcase() {
                 <Image src={project.image || "/placeholder.svg"} alt={project.title} fill className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
                   <div className="p-6 text-white">
-                    <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                    <p className="text-xl font-semibold mb-2">{project.title}</p>
                     <div className="flex items-center gap-2">
                       <div className="bg-gradient-to-r from-green-500 to-green-600 p-1 rounded-full">
                         <ShoppingCart className="h-4 w-4" />

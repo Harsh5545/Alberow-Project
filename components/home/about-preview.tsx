@@ -48,7 +48,7 @@ export function AboutPreview() {
               >
                 <Image
                   src="/assets/ai/dveloper.webp"
-                  alt="Alberow Team"
+                  alt="Alberow Team from Alebrow.com"
                   width={800}
                   height={600}
                   className="w-full h-auto object-cover"
@@ -63,12 +63,12 @@ export function AboutPreview() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <h3 className="text-3xl md:text-4xl font-bold mb-6">
               About{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
                 Alberow
               </span>
-            </h2>
+            </h3>
             <p className="text-foreground/70 mb-6">
               Alberow is a team of passionate web developers and digital marketers dedicated to creating exceptional
               digital experiences. We combine technical expertise with creative design to deliver solutions that help

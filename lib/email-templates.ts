@@ -6,7 +6,7 @@ interface ContactFormData {
   message: string
 }
 
-// Enhanced admin email template with better styling
+// Enhanced admin email template with better responsive design
 export const getAdminEmailTemplate = (data: ContactFormData) => {
   const serviceNames: Record<string, string> = {
     "web-development": "Web Development",
@@ -34,10 +34,12 @@ export const getAdminEmailTemplate = (data: ContactFormData) => {
           line-height: 1.6; 
           color: #333; 
           background-color: #f5f5f5;
+          margin: 0;
+          padding: 0;
         }
         .container { 
           max-width: 600px; 
-          margin: 20px auto; 
+          margin: 10px auto; 
           background: white;
           border-radius: 12px;
           overflow: hidden;
@@ -46,25 +48,31 @@ export const getAdminEmailTemplate = (data: ContactFormData) => {
         .header { 
           background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); 
           color: white; 
-          padding: 30px 20px; 
+          padding: 20px 15px; 
           text-align: center;
         }
-        .header h1 { 
-          font-size: 24px; 
+        .logo {
+          font-size: 20px;
+          font-weight: 800;
           margin-bottom: 8px;
-          font-weight: 700;
+          letter-spacing: 1px;
+        }
+        .header h1 { 
+          font-size: 20px; 
+          margin-bottom: 6px;
+          font-weight: 600;
         }
         .header p { 
           opacity: 0.9; 
-          font-size: 16px;
+          font-size: 14px;
         }
         .content { 
-          padding: 30px 20px; 
+          padding: 20px 15px; 
         }
         .field { 
-          margin-bottom: 20px; 
+          margin-bottom: 15px; 
           border-bottom: 1px solid #eee;
-          padding-bottom: 15px;
+          padding-bottom: 12px;
         }
         .field:last-child { 
           border-bottom: none; 
@@ -73,73 +81,122 @@ export const getAdminEmailTemplate = (data: ContactFormData) => {
         .label { 
           font-weight: 600; 
           color: #555; 
-          font-size: 14px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.5px;
-          margin-bottom: 8px;
+          margin-bottom: 6px;
           display: block;
         }
         .value { 
-          font-size: 16px;
+          font-size: 14px;
           color: #333;
           background: #f8f9fa;
-          padding: 12px 16px;
-          border-radius: 8px;
-          border-left: 4px solid #9333ea;
+          padding: 10px 12px;
+          border-radius: 6px;
+          border-left: 3px solid #9333ea;
+          word-break: break-word;
         }
         .priority { 
           background: #fff3cd;
           border: 1px solid #ffeaa7;
-          border-radius: 8px;
-          padding: 15px;
-          margin: 20px 0;
+          border-radius: 6px;
+          padding: 12px;
+          margin: 15px 0;
         }
         .priority-title {
           color: #856404;
           font-weight: 600;
-          margin-bottom: 5px;
+          margin-bottom: 4px;
+          font-size: 14px;
         }
         .footer { 
           background: #f8f9fa;
-          padding: 20px; 
+          padding: 15px; 
           text-align: center; 
           color: #666; 
-          font-size: 14px;
+          font-size: 12px;
           border-top: 1px solid #eee;
         }
         .timestamp {
           background: #e3f2fd;
-          padding: 10px;
-          border-radius: 6px;
-          font-size: 14px;
+          padding: 8px;
+          border-radius: 4px;
+          font-size: 12px;
           color: #1565c0;
           text-align: center;
-          margin: 15px 0;
+          margin: 12px 0;
         }
         .action-buttons {
           text-align: center;
-          margin: 25px 0;
+          margin: 20px 0;
         }
         .btn {
           display: inline-block;
-          padding: 12px 24px;
+          padding: 10px 20px;
           background: linear-gradient(135deg, #9333ea, #ec4899);
           color: white;
           text-decoration: none;
-          border-radius: 6px;
+          border-radius: 5px;
           font-weight: 600;
-          margin: 0 10px;
+          margin: 5px;
+          font-size: 14px;
         }
-        @media (max-width: 600px) {
-          .container { margin: 10px; }
-          .content { padding: 20px 15px; }
+        
+        /* Mobile Styles */
+        @media screen and (max-width: 600px) {
+          .container { 
+            margin: 5px; 
+            border-radius: 8px;
+          }
+          .content { 
+            padding: 15px 12px; 
+          }
+          .header {
+            padding: 15px 12px;
+          }
+          .logo {
+            font-size: 18px;
+          }
+          .header h1 {
+            font-size: 18px;
+          }
+          .header p {
+            font-size: 13px;
+          }
+          .value {
+            font-size: 13px;
+            padding: 8px 10px;
+          }
+          .btn {
+            display: block;
+            margin: 8px 0;
+            padding: 12px 20px;
+          }
+          .priority {
+            padding: 10px;
+          }
+          .footer {
+            padding: 12px;
+            font-size: 11px;
+          }
+        }
+        
+        /* Tablet Styles */
+        @media screen and (min-width: 601px) and (max-width: 768px) {
+          .container {
+            margin: 15px;
+          }
+          .content {
+            padding: 25px 20px;
+          }
         }
       </style>
     </head>
     <body>
       <div class="container">
         <div class="header">
-          <h1>🚀 New Lead Alert!</h1>
+          <div class="logo">🚀 ALBEROW</div>
+          <h1>New Lead Alert!</h1>
           <p>Someone is interested in your services</p>
         </div>
         
@@ -203,7 +260,7 @@ export const getAdminEmailTemplate = (data: ContactFormData) => {
   `
 }
 
-// Enhanced customer thank you email template
+// Enhanced customer thank you email template with better responsive design
 export const getCustomerEmailTemplate = (name: string) => {
   return `
     <!DOCTYPE html>
@@ -219,10 +276,12 @@ export const getCustomerEmailTemplate = (name: string) => {
           line-height: 1.6; 
           color: #333; 
           background-color: #f5f5f5;
+          margin: 0;
+          padding: 0;
         }
         .container { 
           max-width: 600px; 
-          margin: 20px auto; 
+          margin: 10px auto; 
           background: white;
           border-radius: 12px;
           overflow: hidden;
@@ -231,26 +290,26 @@ export const getCustomerEmailTemplate = (name: string) => {
         .header { 
           background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); 
           color: white; 
-          padding: 40px 20px; 
+          padding: 25px 15px; 
           text-align: center;
         }
         .logo { 
-          font-size: 28px; 
+          font-size: 22px; 
           font-weight: 800; 
-          margin-bottom: 10px;
-          letter-spacing: 2px;
+          margin-bottom: 8px;
+          letter-spacing: 1px;
         }
         .header h1 { 
-          font-size: 24px; 
-          margin-bottom: 10px;
+          font-size: 20px; 
+          margin-bottom: 8px;
           font-weight: 600;
         }
         .header p { 
           opacity: 0.9; 
-          font-size: 16px;
+          font-size: 14px;
         }
         .content { 
-          padding: 40px 30px; 
+          padding: 25px 15px; 
         }
         .highlight { 
           background: linear-gradient(135deg, #9333ea, #ec4899); 
@@ -261,72 +320,142 @@ export const getCustomerEmailTemplate = (name: string) => {
         }
         .contact-info { 
           background: linear-gradient(135deg, #f8f9ff, #fdf2f8);
-          padding: 25px; 
-          border-radius: 12px; 
-          margin: 25px 0;
+          padding: 18px; 
+          border-radius: 8px; 
+          margin: 20px 0;
           border: 1px solid #e5e7eb;
         }
         .contact-item { 
           display: flex; 
           align-items: center; 
-          margin-bottom: 12px;
-          font-size: 15px;
+          margin-bottom: 10px;
+          font-size: 14px;
+          flex-wrap: wrap;
         }
         .contact-item:last-child { margin-bottom: 0; }
         .contact-item strong { 
-          min-width: 100px; 
+          min-width: 80px; 
           color: #9333ea;
+          margin-right: 8px;
         }
         .contact-item a {
           color: #9333ea;
           text-decoration: none;
+          word-break: break-all;
         }
         .features {
           background: #f8f9fa;
-          padding: 20px;
-          border-radius: 8px;
-          margin: 20px 0;
+          padding: 15px;
+          border-radius: 6px;
+          margin: 18px 0;
         }
         .features ul {
           list-style: none;
           padding: 0;
         }
         .features li {
-          padding: 8px 0;
-          font-size: 15px;
+          padding: 6px 0;
+          font-size: 14px;
         }
         .cta-button { 
           display: inline-block; 
           background: linear-gradient(135deg, #9333ea, #ec4899); 
           color: white; 
-          padding: 15px 30px; 
+          padding: 12px 24px; 
           text-decoration: none; 
-          border-radius: 8px; 
-          margin: 25px 0;
+          border-radius: 6px; 
+          margin: 20px 0;
           font-weight: 600;
-          font-size: 16px;
+          font-size: 14px;
+          text-align: center;
+          width: 100%;
+          max-width: 200px;
         }
         .footer { 
           background: #f8f9fa;
-          padding: 25px; 
+          padding: 18px; 
           text-align: center; 
           color: #666; 
-          font-size: 14px;
+          font-size: 12px;
           border-top: 1px solid #eee;
         }
         .social-links {
-          margin: 20px 0;
+          margin: 15px 0;
         }
         .social-links a {
           display: inline-block;
-          margin: 0 10px;
+          margin: 0 8px;
           color: #9333ea;
           text-decoration: none;
+          font-size: 12px;
         }
-        @media (max-width: 600px) {
-          .container { margin: 10px; }
-          .content { padding: 30px 20px; }
-          .contact-info { padding: 20px; }
+        
+        /* Mobile Styles */
+        @media screen and (max-width: 600px) {
+          .container { 
+            margin: 5px; 
+            border-radius: 8px;
+          }
+          .content { 
+            padding: 20px 12px; 
+          }
+          .header {
+            padding: 20px 12px;
+          }
+          .logo {
+            font-size: 20px;
+          }
+          .header h1 {
+            font-size: 18px;
+          }
+          .header p {
+            font-size: 13px;
+          }
+          .contact-info { 
+            padding: 15px; 
+          }
+          .contact-item {
+            font-size: 13px;
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          .contact-item strong {
+            min-width: auto;
+            margin-bottom: 2px;
+          }
+          .features {
+            padding: 12px;
+          }
+          .features li {
+            font-size: 13px;
+          }
+          .cta-button {
+            padding: 14px 20px;
+            font-size: 15px;
+            width: 100%;
+            max-width: none;
+          }
+          .social-links a {
+            display: block;
+            margin: 5px 0;
+          }
+          .footer {
+            padding: 15px;
+            font-size: 11px;
+          }
+        }
+        
+        /* Tablet Styles */
+        @media screen and (min-width: 601px) and (max-width: 768px) {
+          .container {
+            margin: 15px;
+          }
+          .content {
+            padding: 30px 20px;
+          }
+          .contact-info {
+            padding: 20px;
+          }
         }
       </style>
     </head>
@@ -339,15 +468,15 @@ export const getCustomerEmailTemplate = (name: string) => {
         </div>
         
         <div class="content">
-          <h2 style="color: #333; margin-bottom: 20px;">What happens next?</h2>
-          <p style="font-size: 16px; margin-bottom: 20px;">
+          <h2 style="color: #333; margin-bottom: 15px; font-size: 18px;">What happens next?</h2>
+          <p style="font-size: 14px; margin-bottom: 18px;">
             Our expert team will carefully review your project requirements and get back to you within 
             <span class="highlight">24 hours</span>. We're committed to providing you with innovative 
             solutions that exceed your expectations.
           </p>
           
           <div class="contact-info">
-            <h3 style="color: #9333ea; margin-bottom: 15px;">📞 Need Immediate Assistance?</h3>
+            <h3 style="color: #9333ea; margin-bottom: 12px; font-size: 16px;">📞 Need Immediate Assistance?</h3>
             <div class="contact-item">
               <strong>📧 Email:</strong> 
               <a href="mailto:hello@alberow.com">hello@alberow.com</a>
@@ -367,7 +496,7 @@ export const getCustomerEmailTemplate = (name: string) => {
           </div>
 
           <div class="features">
-            <h3 style="color: #333; margin-bottom: 15px;">🌟 Why Choose Alberow?</h3>
+            <h3 style="color: #333; margin-bottom: 12px; font-size: 16px;">🌟 Why Choose Alberow?</h3>
             <ul>
               <li>✅ <strong>Expert Team:</strong> Skilled developers with proven track record</li>
               <li>✅ <strong>Custom Solutions:</strong> Tailored to your specific business needs</li>
@@ -378,7 +507,7 @@ export const getCustomerEmailTemplate = (name: string) => {
             </ul>
           </div>
 
-          <p style="font-size: 16px; margin: 20px 0;">
+          <p style="font-size: 14px; margin: 18px 0;">
             In the meantime, feel free to explore our portfolio and services, or reach out to us 
             directly if you have any urgent questions.
           </p>
@@ -388,7 +517,7 @@ export const getCustomerEmailTemplate = (name: string) => {
           </div>
 
           <div class="social-links" style="text-align: center;">
-            <p style="margin-bottom: 10px; color: #666;">Follow us on social media:</p>
+            <p style="margin-bottom: 8px; color: #666; font-size: 13px;">Follow us on social media:</p>
             <a href="#">📘 Facebook</a>
             <a href="#">📸 Instagram</a>
             <a href="#">💼 LinkedIn</a>
@@ -398,9 +527,9 @@ export const getCustomerEmailTemplate = (name: string) => {
         
         <div class="footer">
           <p><strong>🚀 ALBEROW - Digital Innovation Partner</strong></p>
-          <p style="margin: 10px 0;">This is an automated response. Please do not reply to this email.</p>
+          <p style="margin: 8px 0;">This is an automated response. Please do not reply to this email.</p>
           <p>For immediate assistance, contact us at <a href="mailto:hello@alberow.com" style="color: #9333ea;">hello@alberow.com</a></p>
-          <p style="margin-top: 15px;">© 2024 Alberow. All rights reserved.</p>
+          <p style="margin-top: 12px;">© 2024 Alberow. All rights reserved.</p>
         </div>
       </div>
     </body>

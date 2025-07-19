@@ -81,7 +81,7 @@ export function ProjectsProcess() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold mb-1">{step.title}</h3>
+                    <p className="text-lg font-semibold mb-1">{step.title}</p>
                     <p className="text-foreground/70">{step.description}</p>
                   </div>
                 </motion.div>

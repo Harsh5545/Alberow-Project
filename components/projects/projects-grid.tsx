@@ -129,9 +129,9 @@ export function ProjectsGrid() {
                     </div>
                   </div>
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                    <p className="text-xl font-semibold mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                       {project.title}
-                    </h3>
+                    </p>
                     <p className="text-foreground/70 mb-4">{project.description}</p>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.slice(0, 3).map((tech, i) => (
@@ -260,7 +260,7 @@ export function ProjectsGrid() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 }}
                     >
-                      <h3 className="text-lg font-semibold mb-2">Challenge</h3>
+                      <p className="text-lg font-semibold mb-2">Challenge</p>
                       <p className="text-foreground/70">{selectedProject.challenge}</p>
                     </motion.div>
 
@@ -269,7 +269,7 @@ export function ProjectsGrid() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2 }}
                     >
-                      <h3 className="text-lg font-semibold mb-2">Solution</h3>
+                      <p className="text-lg font-semibold mb-2">Solution</p>
                       <p className="text-foreground/70">{selectedProject.solution}</p>
                     </motion.div>
 
@@ -278,7 +278,7 @@ export function ProjectsGrid() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3 }}
                     >
-                      <h3 className="text-lg font-semibold mb-2">Results</h3>
+                      <p className="text-lg font-semibold mb-2">Results</p>
                       <p className="text-foreground/70">{selectedProject.results}</p>
                     </motion.div>
 
@@ -287,7 +287,7 @@ export function ProjectsGrid() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 }}
                     >
-                      <h3 className="text-lg font-semibold mb-2">Key Features</h3>
+                      <p className="text-lg font-semibold mb-2">Key Features</p>
                       <div className="flex flex-wrap gap-2">
                         {selectedProject.features.map((feature, i) => (
                           <motion.span
@@ -309,7 +309,7 @@ export function ProjectsGrid() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5 }}
                     >
-                      <h3 className="text-lg font-semibold mb-2">Technologies Used</h3>
+                      <p className="text-lg font-semibold mb-2">Technologies Used</p>
                       <div className="flex flex-wrap gap-2">
                         {selectedProject.technologies.map((tech, i) => (
                           <motion.span
@@ -362,7 +362,7 @@ export function ProjectsGrid() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.7 }}
                       >
-                        <h3 className="text-lg font-semibold mb-2">Client Social Media</h3>
+                        <p className="text-lg font-semibold mb-2">Client Social Media</p>
                         <div className="flex gap-2">
                           {Object.entries(selectedProject.socialLinks).map(([platform, url]) => {
                             const IconComponent = getSocialIcon(platform)
