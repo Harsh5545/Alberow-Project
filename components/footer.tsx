@@ -10,7 +10,29 @@ export function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
-
+const socialLinks = [
+    {
+      name: "Facebook",
+      icon: Facebook,
+      href: "https://www.facebook.com/people/Alberow/61578809690084/",
+      color: "hover:text-blue-600",
+      bgColor: "hover:bg-blue-50 dark:hover:bg-blue-950/20",
+    },
+    {
+      name: "Instagram",
+      icon: Instagram,
+      href: "https://www.instagram.com/alberow_/",
+      color: "hover:text-pink-600",
+      bgColor: "hover:bg-pink-50 dark:hover:bg-pink-950/20",
+    },
+    {
+      name: "LinkedIn",
+      icon: Linkedin,
+      href: "https://www.linkedin.com/company/alberow",
+      color: "hover:text-blue-700",
+      bgColor: "hover:bg-blue-50 dark:hover:bg-blue-950/20",
+    },
+  ]
   return (
     <footer className="bg-muted/50 pt-16 pb-8">
       <div className="container mx-auto px-4">
@@ -29,7 +51,7 @@ export function Footer() {
             <p className="text-foreground/70 mb-6">
               Creating powerful digital experiences that drive growth and engagement for your business.
             </p>
-            <div className="flex space-x-4">
+            {/* <div className="flex space-x-4">
               <a href="#" className="text-foreground/60 hover:text-purple-600 transition-colors">
                 <Facebook size={20} />
                 <span className="sr-only">Facebook</span>
@@ -46,6 +68,30 @@ export function Footer() {
                 <Linkedin size={20} />
                 <span className="sr-only">LinkedIn</span>
               </a>
+            </div> */}
+             {/* Social Links */}
+            <div className="flex space-x-3">
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-10 h-10 rounded-xl bg-muted/50 flex items-center justify-center text-foreground/60 transition-all duration-300 ${social.color} ${social.bgColor}`}
+                  whileHover={{
+                    scale: 1.1,
+                    rotate: 5,
+                    y: -2,
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 + index * 0.1 }}
+                >
+                  <social.icon size={18} />
+                  <span className="sr-only">{social.name}</span>
+                </motion.a>
+              ))}
             </div>
           </motion.div>
 

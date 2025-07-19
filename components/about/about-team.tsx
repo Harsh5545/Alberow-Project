@@ -45,6 +45,15 @@ const teamMembers = [
     },
   },
   {
+  name: "Umair Sheikh",
+  role: "Full Stack Developer",
+  bio: "Umair specializes in both frontend and backend development, building scalable web applications and ensuring seamless user experiences from design to deployment.",
+  social: {
+    instagram: "https://instagram.com/umair.sheikh_",
+    github: "#",
+  },
+},
+  {
     name: "Divansaheb Sangale",
     role: "Offline Marketing Specialist",
     bio: "Divansaheb brings traditional marketing expertise to complement our digital strategies, creating comprehensive marketing solutions.",
