@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     siteName: 'Alberow',
     images: [
       {
-        url: 'https://alberow.com/og-image.png',
+        url: 'https://alberow.com/assets/AboutAlberow.webp',
         width: 1200,
         height: 630,
         alt: 'Alberow - Professional Web Development',
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     description: 'Alberow delivers custom websites, applications, and digital solutions for businesses of all sizes.',
     site: '@alberow',
     creator: '@alberow',
-    images: ['https://alberow.com/og-image.png'],
+    images: ['https://alberow.com/assets/AboutAlberow.webp'],
   },
   metadataBase: new URL('https://alberow.com'),
   alternates: {
