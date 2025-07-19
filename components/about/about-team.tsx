@@ -15,15 +15,7 @@ const teamMembers = [
       github: "https://github.com/Harsh5545",
     },
   },
-  {
-    name: "Harsh Jaiswal",
-    role: "Frontend Developer",
-    bio: "Harsh specializes in creating beautiful, responsive user interfaces using the latest frontend technologies and frameworks.",
-    social: {
-      linkedin: "https://www.linkedin.com/in/harsh-jaisw12/",
-      github: "https://github.com/Harsh-Jaisw",
-    },
-  },
+ 
   {
     name: "Bhavish",
     role: "Full Stack Developer",
@@ -35,13 +27,11 @@ const teamMembers = [
     },
   },
   {
-    name: "Yashvardhan Jaiswal",
-    role: "Backend Developer",
-    bio: "Yashvardhan builds robust, scalable backend systems that power our applications with efficiency and reliability.",
+    name: "Divansaheb Sangale",
+    role: "Offline Marketing Specialist",
+    bio: "Divansaheb brings traditional marketing expertise to complement our digital strategies, creating comprehensive marketing solutions.",
     social: {
-      instagram: "https://www.instagram.com/funkyheart_/",
-      linkedin: "https://www.linkedin.com/in/yashwardhan-jaiswal-13866a235/",
-      github: "https://github.com/yash13565",
+      instagram: "https://www.instagram.com/divansangale/",
     },
   },
   {
@@ -53,14 +43,16 @@ const teamMembers = [
     github: "#",
   },
 },
-  {
-    name: "Divansaheb Sangale",
-    role: "Offline Marketing Specialist",
-    bio: "Divansaheb brings traditional marketing expertise to complement our digital strategies, creating comprehensive marketing solutions.",
-    social: {
-      instagram: "https://www.instagram.com/divansangale/",
-    },
+{
+  name: "Siddhesh Thorat",
+  role: "Offline Marketing & Operations",
+  bio: "Siddhesh manages offline marketing strategies and supports day-to-day operations, ensuring seamless coordination between teams and building strong brand presence beyond digital platforms.",
+  social: {
+    linkedin: "https://www.linkedin.com/in/siddhesh-thorat-4b8675326/",
+    instagram: "https://www.instagram.com/_siddhesh.26/",
   },
+},
+  
   {
     name: "Manasi Kadam",
     role: "Digital Marketing Specialist",
@@ -68,6 +60,25 @@ const teamMembers = [
     social: {
       linkedin: "https://www.linkedin.com/in/k-manasi/",
       instagram: "https://www.instagram.com/manasikadam_/",
+    },
+  },
+   {
+    name: "Harsh Jaiswal",
+    role: "Frontend Developer",
+    bio: "Harsh specializes in creating beautiful, responsive user interfaces using the latest frontend technologies and frameworks.",
+    social: {
+      linkedin: "https://www.linkedin.com/in/harsh-jaisw12/",
+      github: "https://github.com/Harsh-Jaisw",
+    },
+  },
+  {
+    name: "Yashvardhan Jaiswal",
+    role: "Backend Developer",
+    bio: "Yashvardhan builds robust, scalable backend systems that power our applications with efficiency and reliability.",
+    social: {
+      instagram: "https://www.instagram.com/funkyheart_/",
+      linkedin: "https://www.linkedin.com/in/yashwardhan-jaiswal-13866a235/",
+      github: "https://github.com/yash13565",
     },
   },
 ]
