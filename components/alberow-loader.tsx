@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-export function AlberowLoader() {
+export function AlberowLoaderFixed() {
   const [isVisible, setIsVisible] = useState(true)
   const [fadeOut, setFadeOut] = useState(false)
 
@@ -26,79 +26,90 @@ export function AlberowLoader() {
   if (!isVisible) return null
 
   return (
-    <>
+    <div
+      className={`fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-500 ${
+        fadeOut ? "opacity-0" : "opacity-100"
+      }`}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundColor: "white",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 9999,
+      }}
+    >
+      <div
+        className="text-center"
+        style={{
+          textAlign: "center",
+          opacity: fadeOut ? 0 : 1,
+          transition: "opacity 0.5s ease-out",
+        }}
+      >
+        {/* Logo Text with inline styles to prevent flash */}
+        <h1
+          style={{
+            fontSize: "3rem",
+            fontWeight: 800,
+            background: "linear-gradient(135deg, #9433E8, #ec4899, #BF2BA2)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            color: "transparent",
+            marginBottom: "1rem",
+            animation: "slideUp 0.8s ease-out",
+            fontFamily: "system-ui, -apple-system, sans-serif",
+          }}
+        >
+          Alberow
+        </h1>
+
+        {/* Tagline */}
+        <p
+          style={{
+            fontSize: "0.875rem",
+            color: "#64748b",
+            fontWeight: 500,
+            letterSpacing: "2px",
+            textTransform: "uppercase",
+            animation: "slideUp 0.8s ease-out 0.2s both",
+            marginBottom: "1.5rem",
+            fontFamily: "system-ui, -apple-system, sans-serif",
+          }}
+        >
+          Digital Innovation Partner
+        </p>
+
+        {/* Loading Bar */}
+        <div
+          style={{
+            width: "200px",
+            height: "3px",
+            backgroundColor: "#e2e8f0",
+            borderRadius: "2px",
+            margin: "0 auto",
+            overflow: "hidden",
+            animation: "slideUp 0.8s ease-out 0.4s both",
+          }}
+        >
+          <div
+            style={{
+              height: "100%",
+              background: "linear-gradient(90deg, #9433E8, #ec4899, #BF2BA2)",
+              borderRadius: "2px",
+              animation: "loadProgress 1.5s ease-out",
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Inline CSS to prevent any loading issues */}
       <style jsx>{`
-        .alberow-loader {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: white;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 9999;
-          transition: opacity 0.5s ease-out;
-        }
-        
-        .dark .alberow-loader {
-          background: #0f172a;
-        }
-        
-        .fade-out {
-          opacity: 0;
-        }
-        
-        .alberow-logo {
-          text-align: center;
-        }
-        
-        .alberow-text {
-          font-size: 3rem;
-          font-weight: 800;
-          background: linear-gradient(135deg, #9433E8, #ec4899, #BF2BA2);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          margin-bottom: 1rem;
-          animation: slideUp 0.8s ease-out;
-        }
-        
-        .alberow-tagline {
-          font-size: 0.875rem;
-          color: #64748b;
-          font-weight: 500;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          animation: slideUp 0.8s ease-out 0.2s both;
-        }
-        
-        .dark .alberow-tagline {
-          color: #94a3b8;
-        }
-        
-        .loading-bar {
-          width: 200px;
-          height: 3px;
-          background: #e2e8f0;
-          border-radius: 2px;
-          margin: 1.5rem auto 0;
-          overflow: hidden;
-          animation: slideUp 0.8s ease-out 0.4s both;
-        }
-        
-        .dark .loading-bar {
-          background: #334155;
-        }
-        
-        .loading-progress {
-          height: 100%;
-          background: linear-gradient(90deg, #9433E8, #ec4899, #BF2BA2);
-          border-radius: 2px;
-          animation: loadProgress 1.5s ease-out;
-        }
-        
         @keyframes slideUp {
           from {
             opacity: 0;
@@ -109,7 +120,7 @@ export function AlberowLoader() {
             transform: translateY(0);
           }
         }
-        
+
         @keyframes loadProgress {
           from {
             width: 0%;
@@ -118,38 +129,39 @@ export function AlberowLoader() {
             width: 100%;
           }
         }
-        
-        /* Mobile responsive */
-        @media (max-width: 640px) {
-          .alberow-text {
-            font-size: 2.5rem;
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+          .dark-bg {
+            background-color: #0f172a !important;
           }
-          
-          .loading-bar {
-            width: 150px;
+          .dark-tagline {
+            color: #94a3b8 !important;
+          }
+          .dark-bar {
+            background-color: #334155 !important;
           }
         }
-        
-        @media (max-width: 480px) {
-          .alberow-text {
-            font-size: 2rem;
+
+        /* Mobile responsive */
+        @media (max-width: 640px) {
+          .mobile-text {
+            font-size: 2.5rem !important;
           }
-          
-          .loading-bar {
-            width: 120px;
+          .mobile-bar {
+            width: 150px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .mobile-text-small {
+            font-size: 2rem !important;
+          }
+          .mobile-bar-small {
+            width: 120px !important;
           }
         }
       `}</style>
-
-      <div className={`alberow-loader ${fadeOut ? "fade-out" : ""}`}>
-        <div className="alberow-logo">
-          <h1 className="alberow-text">Alberow</h1>
-          <p className="alberow-tagline">Digital Innovation Partner</p>
-          <div className="loading-bar">
-            <div className="loading-progress"></div>
-          </div>
-        </div>
-      </div>
-    </>
+    </div>
   )
 }

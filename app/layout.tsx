@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
+import { InstantLoader } from '@/components/instant-loader'
 // import { PageLoader } from '@/components/page-loader'
 // import { AlberowLoader } from '@/components/alberow-loader'
 
@@ -80,7 +81,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body> <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        {/* <AlberowLoader /> */}
+        {/* <AlberowLoader /> */}<InstantLoader />
           {children}
         </ThemeProvider></body>
     </html>
