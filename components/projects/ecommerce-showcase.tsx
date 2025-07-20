@@ -38,7 +38,7 @@ export function EcommerceShowcase() {
               className="bg-background rounded-xl overflow-hidden border border-border/50 shadow-sm hover:shadow-md transition-all duration-300"
             >
               <div className="relative h-64 bg-muted">
-                <Image src={project.image || "/placeholder.svg"} alt={project.title} fill className="object-cover" />
+                <Image src={project.image || "/placeholder.svg"} alt={project.title} title={project.title} fill className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
                   <div className="p-6 text-white">
                     <p className="text-xl font-semibold mb-2">{project.title}</p>

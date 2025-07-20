@@ -49,6 +49,7 @@ export function AboutPreview() {
                 <Image
                   src="/assets/ai/dveloper.webp"
                   alt="Alberow Team from Alebrow.com"
+                  title="Alberow Team"
                   width={800}
                   height={600}
                   className="w-full h-auto object-cover"

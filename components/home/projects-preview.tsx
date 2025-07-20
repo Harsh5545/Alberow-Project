@@ -67,6 +67,7 @@ export function ProjectsPreview() {
                   <Image
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
+                    title={project.title}
                     width={600}
                     height={400}
                     className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"

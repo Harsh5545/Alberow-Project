@@ -58,6 +58,7 @@ export function BlogPreview() {
                   <Image
                     src={post.image || "/placeholder.svg"}
                     alt={post.title}
+                    title={post.title}
                     width={500}
                     height={300}
                     className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"

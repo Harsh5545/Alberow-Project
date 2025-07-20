@@ -97,6 +97,7 @@ export function TeamPreview() {
                   <Image
                     src={member.image || "/placeholder.svg"}
                     alt={member.name}
+                    title={member.name}
                     width={400}
                     height={400}
                     className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"

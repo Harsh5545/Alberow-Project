@@ -121,6 +121,7 @@ export function ProjectsGrid() {
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
                       width={600}
+                      title={project.title}
                       height={400}
                       className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
                     />
@@ -172,6 +173,7 @@ export function ProjectsGrid() {
                       <Image
                         src={selectedProject.images[currentImageIndex] || "/placeholder.svg"}
                         alt={`${selectedProject.title} image ${currentImageIndex + 1}`}
+                        title="Project Image"
                         fill
                         className="object-cover"
                       />
