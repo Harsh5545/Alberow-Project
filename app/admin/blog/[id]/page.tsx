@@ -9,3 +9,4 @@ export const metadata: Metadata = {
 export default function EditBlogPage({ params }: { params: { id: string } }) {
   // return <EditBlogPageClient id={params.id} />
 }
+
