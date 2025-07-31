@@ -47,6 +47,11 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+   icons: {
+    icon: "/assets/alberow.webp", // Path to your logo in the public directory
+    shortcut: "/assets/alberow.webp",
+    apple: "/assets/alberow.webp",
+  },
   twitter: {
     card: 'summary_large_image',
     title: 'Alberow - Professional Web Development',
